@@ -1,3 +1,4 @@
+import utils.ArrayGenerator;
 import utils.ConsolePrinter;
 
 /**
@@ -10,10 +11,7 @@ public class Task1 {
     public static void main(String[] args) {
         //Generating random test array
         int arraySize = 20;
-        int[] array = new int[arraySize];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (int)(Math.random()*199)-100;
-        }
+        int[] array = ArrayGenerator.getOneDimensionalArray(arraySize);
         //Sorting
         sortArray(array);
         //Printing to console
