@@ -1,7 +1,7 @@
 
 /**
  *
- * @author vova
+ * @author Vova Korobko
  */
 public class Loops {
 
