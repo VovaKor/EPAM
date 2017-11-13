@@ -1,5 +1,4 @@
-import utils.ArrayGenerator;
-import utils.ConsolePrinter;
+import main.java.ua.epam.utils.ConsolePrinter;
 
 /**
  * Дана целочисленная прямоугольная матрица. Упорядочить столбцы по убыванию среднего значения.

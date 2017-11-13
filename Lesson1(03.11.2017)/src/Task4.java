@@ -1,4 +1,4 @@
-import utils.ConsolePrinter;
+import main.java.ua.epam.utils.ConsolePrinter;
 
 /**
  * Дана целочисленная прямоугольная матрица. Упорядочить строки,

@@ -1,4 +1,4 @@
-package utils;
+package main.java.ua.epam.utils;
 
 public class ArrayGenerator {
     public static int[] getOneDimensionalArray(int arraySize){

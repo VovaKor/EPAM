@@ -6,7 +6,7 @@
 public class Loops {
 
 public static void main(String[] args) {
-int shapeSize=10;   
+int shapeSize=10;
     /*
    Isosceles triangle
                           * 

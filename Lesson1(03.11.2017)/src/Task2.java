@@ -1,5 +1,4 @@
-import utils.ArrayGenerator;
-import utils.ConsolePrinter;
+import main.java.ua.epam.utils.ConsolePrinter;
 
 /**
  * Упорядочить одномерный масив сначала положительные потом отрицательные за О(n).

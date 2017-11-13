@@ -1,4 +1,6 @@
-package main.java.ua.epam.utils;
+package ua.epam.utils;
+
+import java.util.Arrays;
 
 public class ConsolePrinter {
     public static void printArray(int[] array){
@@ -29,5 +31,9 @@ public class ConsolePrinter {
             }
             System.out.println();
         }
+    }
+
+    public static void printArray(Object[] array) {
+        System.out.println(Arrays.toString(array));
     }
 }
