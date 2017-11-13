@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  */
 
 public class Task3 {
-    private List<CVehicle> getSpeedInRangeNotPlane(List<CVehicle> vehicles){
+    public static List<CVehicle> getSpeedInRangeNotPlane(List<CVehicle> vehicles){
 
         return vehicles.stream()
                 .filter(cVehicle -> cVehicle.getMechanismId()<1000 && cVehicle.getMechanismId()>2000)

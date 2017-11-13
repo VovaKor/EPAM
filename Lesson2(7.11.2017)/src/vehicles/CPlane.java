@@ -29,4 +29,11 @@ public class CPlane extends CVehicle implements FlyAble {
         this.maxAltitude = maxAltitude;
     }
 
+    @Override
+    public String toString() {
+        return "CPlane{" +
+                "maxAltitude=" + maxAltitude +
+                ", year=" + getYear() +
+                '}';
+    }
 }

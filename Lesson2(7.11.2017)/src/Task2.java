@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class Task2 {
     // Method assumes Planes have unique ID's in given range
-    private List<CPlane> getPlanesByAltitudeAndYear(List<CVehicle> vehicles){
+    public static List<CPlane> getPlanesByAltitudeAndYear(List<CVehicle> vehicles){
         List<CPlane> planes = new ArrayList<>();
                 vehicles.stream()
                 .filter(cVehicle -> cVehicle.getYear()>2000)

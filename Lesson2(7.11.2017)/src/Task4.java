@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Task4 {
 
-    private FlyAble[] getFlyable(List<CVehicle> vehicles){
+    public static FlyAble[] getFlyable(List<CVehicle> vehicles){
         ArrayList<FlyAble> flyAbles = new ArrayList<>();
 
         vehicles.stream()
@@ -22,7 +22,7 @@ public class Task4 {
         return flyAbles.toArray(new FlyAble[flyAbles.size()]);
     }
 
-    private MoveAble[] getMovable(List<CVehicle> vehicles){
+    public static MoveAble[] getMovable(List<CVehicle> vehicles){
         ArrayList<MoveAble> moveAbles = new ArrayList<>();
 
         vehicles.stream()
@@ -31,7 +31,7 @@ public class Task4 {
         return moveAbles.toArray(new MoveAble[moveAbles.size()]);
     }
 
-    private SwimAble[] getSwimable(List<CVehicle> vehicles){
+    public static SwimAble[] getSwimable(List<CVehicle> vehicles){
         ArrayList<SwimAble> swimAbles = new ArrayList<>();
 
         vehicles.stream()

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class Task1 {
 
     //Finding vehicle with lowest price
-    private CVehicle getVehicleWithMinPrice(List<CVehicle> vehicles){
+    public static CVehicle getVehicleWithMinPrice(List<CVehicle> vehicles){
 
         return vehicles.stream().min((o1, o2) -> {
             if(o1.getPrice()> o2.getPrice())
@@ -24,7 +24,7 @@ public class Task1 {
     }
 
     //Finding vehicle with max speed
-    private CVehicle getVehicleWithMaxSpeed(List<CVehicle> vehicles){
+    public static CVehicle getVehicleWithMaxSpeed(List<CVehicle> vehicles){
         return vehicles.stream().max((o1, o2) -> {
             if(o1.getSpeed()> o2.getSpeed())
                 return 1;
@@ -36,7 +36,7 @@ public class Task1 {
     }
 
     // Finding vehicles not older then 5 years
-    private List<CVehicle> getVehiclesNotOlderThen5Years(List<CVehicle> vehicles){
+    public static List<CVehicle> getVehiclesNotOlderThen5Years(List<CVehicle> vehicles){
 
         return vehicles
                 .stream()

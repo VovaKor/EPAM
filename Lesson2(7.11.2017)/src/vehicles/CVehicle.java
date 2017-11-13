@@ -64,4 +64,12 @@ public abstract class CVehicle {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return '{'+this.getClass().getName()+
+                ", price=" + price +
+                ", speed=" + speed +
+                ", year=" + year +
+                '}';
+    }
 }
