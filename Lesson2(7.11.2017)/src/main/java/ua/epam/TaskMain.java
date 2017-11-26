@@ -1,7 +1,7 @@
 package ua.epam;
 
+import ua.epam.factories.ExtendedVehiclesFactory;
 import ua.epam.factories.StandardVehicleFactory;
-import ua.epam.factories.VehiclesFactory;
 import ua.epam.utils.ConsolePrinter;
 import ua.epam.vehicles.CVehicle;
 
@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ua.epam.utils.Constants.MENU;
 
 /**
  * Создать абстрактный класс CVerhicle. На его основе реализовать классы CPlane,
@@ -30,13 +32,7 @@ import java.util.List;
  * @author Vova Korobko
  */
 public class TaskMain {
-    public static final String MENU = "\n\nВыберите действие по порядковому номеру и нажмите Enter:\n" +
-            "1. Вывести механизмы с наименьшей ценой, с наибольшей скоростью и не старше 5 лет\n"+
-            "2. Вывести механизмы Plane c высотой полета выше 5000 и годом выпуска после 2000\n" +
-            "3. Вывести механизмы со скоростью в диапазоне 200 - 500, но не Plane\n"+
-            "4. Добавить к данной иерархии машину-амфибию, и БетМобиль, создать и вывести на экран " +
-            "   3 массива сгупированых по Интерфейсам Flyable, MoveAble, SwimAble\n" +
-            "5. Выход из программы\n";
+
     public static void main(String...args){
         final int listSize = 100;
         List<CVehicle> vehicleList = new ArrayList<>();
@@ -78,7 +74,7 @@ public class TaskMain {
                     List<CVehicle> vehicles = new ArrayList<>();
 
                     for(int i = 0; i < listSize; i++){
-                        vehicles.add(VehiclesFactory.createVehicle());
+                        vehicles.add(ExtendedVehiclesFactory.createVehicle());
                     }
                     System.out.println("Массив сгупированный по Интерфейсу Flyable:");
                     ConsolePrinter.printArray(Task4.getFlyable(vehicles));

@@ -4,8 +4,8 @@ import ua.epam.vehicles.CShip;
 
 import java.util.Random;
 
-public class CShipConcreteFactory extends AbstractConcreteFactory {
-    public CShip create() {
+public class CShipFactory extends AbstractFactory {
+    public static CShip create() {
         Random r = new Random();
 
         return new CShip(r.nextInt(200) + 2001,r.nextInt(47) + 1970 ,r.nextInt(10000) + 60000,

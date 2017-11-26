@@ -4,8 +4,8 @@ import ua.epam.vehicles.CPlane;
 
 import java.util.Random;
 
-public class CPlaneConcreteFactory extends AbstractConcreteFactory {
-    public CPlane create(){
+public class CPlaneFactory extends AbstractFactory {
+    public static CPlane create(){
         Random r = new Random();
 
         return new CPlane(r.nextInt(1000) + 1000, r.nextInt(30) + 1988,

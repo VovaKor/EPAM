@@ -4,6 +4,7 @@ import ua.epam.factories.ColoredShapeFactory;
 import ua.epam.factories.ShapeFactory;
 import ua.epam.shapes.Shape;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static ua.epam.Constants.COLOR;

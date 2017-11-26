@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.epam</groupId>
-    <artifactId>UniverEPAMJava</artifactId>
+    <artifactId>EPAM</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>UniverEPAMJava</name>
+    <name>EPAM</name>
     <url>http://maven.apache.org</url>
 
     <properties>

@@ -28,21 +28,21 @@ public class Task1 {
     //Finding vehicle with max speed
     public static CVehicle getVehicleWithMaxSpeed(List<CVehicle> vehicles){
         return vehicles.stream().max((o1, o2) -> {
-            if(o1.getSpeed()> o2.getSpeed())
+            if(o1.getSpeed() > o2.getSpeed())
                 return 1;
-            else if(o1.getSpeed()< o2.getSpeed())
+            else if(o1.getSpeed() < o2.getSpeed())
                 return -1;
             else
                 return 0;
         }).get();
     }
 
-    // Finding main.java.ua.epam.vehicles not older then 5 years
+    // Finding vehicles not older then 5 years
     public static List<CVehicle> getVehiclesNotOlderThen5Years(List<CVehicle> vehicles){
 
         return vehicles
                 .stream()
-                .filter(cVehicle -> LocalDate.now().getYear()-cVehicle.getYear()<= 5)
+                .filter(cVehicle -> LocalDate.now().getYear() - cVehicle.getYear() <= 5)
                 .collect(Collectors.toList());
     }
 }
