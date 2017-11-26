@@ -15,7 +15,7 @@ public class WeatherData extends Observable {
     public WeatherData() {
     }
 
-    public void measurementsChanged() {
+    private void measurementsChanged() {
         setChanged();
         notifyObservers();
     }
@@ -25,9 +25,7 @@ public class WeatherData extends Observable {
         int newHumidity = (int) Math.round(humidity);
         int newPressure = (int) Math.round(pressure);
 
-        if (this.temperature != newTemperature
-                || this.humidity != newHumidity
-                || this.pressure != newPressure) {
+        if (isMeasurementsChanged(newTemperature, newHumidity, newPressure)) {
 
             this.temperature = newTemperature;
             this.humidity = newHumidity;
@@ -36,6 +34,11 @@ public class WeatherData extends Observable {
 
         }
 
+    }
+    private boolean isMeasurementsChanged(int temperature, int humidity, int pressure) {
+        return this.temperature != temperature
+                || this.humidity != humidity
+                || this.pressure != pressure;
     }
 
     public int getTemperature() {

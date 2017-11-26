@@ -8,7 +8,7 @@ import org.openweathermap.api.query.currentweather.CurrentWeatherOneLocationQuer
 
 import java.util.concurrent.TimeUnit;
 
-import static com.korobko.Constants.API_KEY;
+import static com.korobko.Constants.*;
 
 /**
  * 1. Реализовать патерн наблюдатель(Weather Station)
@@ -29,8 +29,8 @@ public class WeatherStation {
         CurrentWeatherOneLocationQuery currentWeatherOneLocationQuery = QueryBuilderPicker.pick()
                 .currentWeather()                   // get current weather
                 .oneLocation()                      // for one location
-                .byCityName("Kiev")                 // for Kiev city
-                .countryCode("UA")                  // in Ukraine
+                .byCityName(CITY_NAME)                 // for Kiev city
+                .countryCode(COUNTRY_CODE)                  // in Ukraine
                 .type(Type.ACCURATE)                // with Accurate search
                 .language(Language.ENGLISH)         // in English language
                 .responseFormat(ResponseFormat.JSON)// with JSON response format
@@ -45,7 +45,7 @@ public class WeatherStation {
                     currentWeather.getMainParameters().getHumidity(),
                     currentWeather.getMainParameters().getPressure());
             try {
-                TimeUnit.HOURS.sleep(1);
+                TimeUnit.HOURS.sleep(SLEEP_TIMEOUT);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

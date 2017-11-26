@@ -19,9 +19,9 @@ public class CurrentConditionsDisplay implements Observer, DisplayElement {
         observable.addObserver(this);
     }
 
-    public void update(Observable  obs, Object arg) {
-        if (obs instanceof WeatherData) {
-            WeatherData weatherData = (WeatherData)obs;
+    public void update(Observable  observable, Object arg) {
+        if (observable instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData)observable;
             this.temperature = weatherData.getTemperature();
             this.humidity = weatherData.getHumidity();
             this.pressure = weatherData.getPressure();
@@ -35,5 +35,15 @@ public class CurrentConditionsDisplay implements Observer, DisplayElement {
                 + pressure + " millibar pressure");
     }
 
+    public int getTemperature() {
+        return temperature;
+    }
 
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public int getPressure() {
+        return pressure;
+    }
 }
