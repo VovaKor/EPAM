@@ -1,0 +1,42 @@
+Sue: What do you mean?
+
+Mary: Look at the class diagram. The CondimentDecorator is extending the Beverage class.
+That’s inheritance, right?
+
+Sue: True. I think the point is that it’s vital that the decorators have the same type as the
+objects they are going to decorate. So here we’re using inheritance to achieve the type matching,
+but we aren’t using inheritance to get behavior.
+
+Mary: Okay, I can see how decorators need the same “interface” as the components they wrap
+because they need to stand in place of the component. But where does the behavior come in?
+
+Sue: When we compose a decorator with a component, we are adding new behavior. We
+are acquiring new behavior not by inheriting it from a superclass, but by composing objects
+together.
+
+Mary: Okay, so we’re subclassing the abstract class Beverage in order to have the correct type,
+not to inherit its behavior. The behavior comes in through the composition of decorators with
+the base components as well as other decorators.
+
+Sue: That’s right.
+
+Mary: Ooooh, I see. And because we are using object composition, we get a whole lot more
+flexibility about how to mix and match condiments and beverages. Very smooth.
+
+Sue: Yes, if we rely on inheritance, then our behavior can only be determined statically at
+compile time. In other words, we get only whatever behavior the superclass gives us or that we
+override. With composition, we can mix and match decorators any way we like... at runtime.
+
+Mary: And as I understand it, we can implement new decorators at any time to add new
+behavior. If we relied on inheritance, we’d have to go in and change existing code any time we
+wanted new behavior.
+
+Sue: Exactly.
+
+Mary: I just have one more question. If all we need to inherit is the type of the component,
+how come we didn’t use an interface instead of an abstract class for the Beverage class?
+
+Sue: Well, remember, when we got this code, Starbuzz already had an abstract Beverage class.
+Traditionally the Decorator Pattern does specify an abstract component, but in Java, obviously,
+we could use an interface. But we always try to avoid altering existing code, so don’t “fix” it if
+the abstract class will work just fine.
