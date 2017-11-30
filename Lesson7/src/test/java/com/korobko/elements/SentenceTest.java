@@ -1,28 +1,41 @@
 package com.korobko.elements;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Vova Korobko
  */
-class SentenceTest {
-    Sentence sentence;
-    @BeforeEach
-    void setUp() {
+
+public class SentenceTest {
+    public static final String TEST_SENTENCE = "asdasdfghfgh";
+    private Sentence sentence;
+    @Before
+    public void setUp() {
+        sentence = new Sentence(TEST_SENTENCE);
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
+        sentence = null;
     }
 
     @Test
-    void cutSubstring_fromWordWithLetters_success() {
-        sentence = new Sentence("asdasdfghfgh");
-        assertTrue(sentence.cutSubstring('s', 'g').toString().equals("ah"));
+    public void cutSubstring_bothLettersMatch_successfulCut() {
+        assertEquals("ah", sentence.cutSubstring('s', 'g').toString());
+    }
+
+    @Test
+    public void cutSubstring_firstCharDoNotMatch_notCuttedOff() {
+        assertEquals(TEST_SENTENCE, sentence.cutSubstring('e', 'g').toString());
+    }
+
+    @Test
+    public void cutSubstring_secondCharDoNotMatch_notCuttedOff() {
+        assertEquals(TEST_SENTENCE, sentence.cutSubstring('s', 'e').toString());
     }
 
 }

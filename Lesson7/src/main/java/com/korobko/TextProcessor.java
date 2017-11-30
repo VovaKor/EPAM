@@ -41,6 +41,7 @@ public class TextProcessor {
 
     /**
      * Gets list of sentences from given array of expressions
+     * @return sentences trimmed, removed duplicated spaces and tabs
      */
     public static List<Sentence> getSentences(String[] expressions) {
         List<Sentence> sentenceList = new ArrayList<>();
