@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<paper_store>
+    <papers id="345654" title="New Booklet" isMonthly="true">
+        <type>BOOKLET</type>
+        <characteristics isColored="true" pageAmount="500" isGlossy="true"/>
+    </papers>
+    <paper id="145665" title="New Magazine" isMonthly="true">
+        <type>MAGAZINE</type>
+        <characteristics isColored="true" pageAmount="500" isGlossy="true" subscriptionIndex="456328"/>
+    </paper>
+    <paper id="245565" title="New Paper" isMonthly="true">
+        <type>NEWSPAPER</type>
+        <characteristics isColored="true" pageAmount="40" isGlossy="false" subscriptionIndex="324328"/>
+    </paper>
+</paper_store>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="characteristics" type="characteristics"/>
+
+  <xs:element name="paper" type="paper"/>
+
+  <xs:element name="paper_store" type="paperStore"/>
+
+  <xs:complexType name="paperStore">
+    <xs:sequence>
+      <xs:element ref="paper" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="paper">
+    <xs:sequence>
+
+      <xs:element name="type" type="periodicalType"/>
+      <xs:element ref="characteristics"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:long" use="required"/>
+    <xs:attribute name="isMonthly" type="xs:boolean" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="characteristics">
+    <xs:sequence/>
+    <xs:attribute name="isColored" type="xs:boolean" use="required"/>
+    <xs:attribute name="pageAmount" type="xs:int" use="required"/>
+    <xs:attribute name="isGlossy" type="xs:boolean" use="required"/>
+    <xs:attribute name="subscriptionIndex">
+        <xs:simpleType>
+            <xs:restriction base="xs:int">
+            <!--    <xs:length value="6"/> -->
+                <xs:pattern value="\d{6}"/>
+            </xs:restriction>
+        </xs:simpleType>
+
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="periodicalType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEWSPAPER"/>
+      <xs:enumeration value="MAGAZINE"/>
+      <xs:enumeration value="BOOKLET"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

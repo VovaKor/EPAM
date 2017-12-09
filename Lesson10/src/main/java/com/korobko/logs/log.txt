@@ -1,0 +1,4 @@
+INFO - DOM builder fetched all papers
+INFO - DOM builder fetched all papers
+09.12.2017 16:04:32 INFO  com.korobko.builders.XmlBuilder - SAX builder fetched all papers
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
