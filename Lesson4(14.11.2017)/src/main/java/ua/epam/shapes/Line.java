@@ -4,7 +4,7 @@ import ua.epam.Validator;
 
 import static ua.epam.Constants.COLOR;
 
-public class Line extends Shape implements Cloneable{
+public class Line extends Shape {
     private Point beg;
     private Point end;
 
@@ -23,7 +23,7 @@ public class Line extends Shape implements Cloneable{
     }
 
     public double getLength() {
-        return Math.sqrt(Math.pow(beg.getX() - end.getX(), 2d) + Math.pow(beg.getY() - end.getY(), 2d));
+        return Math.sqrt(Math.pow(end.getX() - beg.getX(), 2d) + Math.pow(end.getY() - beg.getY(), 2d));
     }
 
     public Point getBeg() {

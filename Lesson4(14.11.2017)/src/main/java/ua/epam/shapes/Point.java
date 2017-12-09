@@ -2,9 +2,11 @@ package ua.epam.shapes;
 
 import ua.epam.Validator;
 
+import java.util.Objects;
+
 import static ua.epam.Constants.COLOR;
 
-public class Point extends Shape implements Cloneable {
+public class Point extends Shape {
     private int x;
     private int y;
 
@@ -53,17 +55,14 @@ public class Point extends Shape implements Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Point point = (Point) o;
-
-        if (x != point.x) return false;
-        return y == point.y;
+        return x == point.x &&
+                y == point.y;
     }
 
     @Override
     public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
-        return result;
+
+        return Objects.hash(x, y);
     }
 }

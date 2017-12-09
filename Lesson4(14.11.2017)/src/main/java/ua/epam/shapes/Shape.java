@@ -1,9 +1,10 @@
 package ua.epam.shapes;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Shape {
+public abstract class Shape implements Serializable, Cloneable {
     private Map<String, Object> properties;
 
     public Shape() {

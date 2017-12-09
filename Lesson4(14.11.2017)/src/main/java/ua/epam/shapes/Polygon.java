@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static ua.epam.Constants.COLOR;
 
-public class Polygon extends Shape{
+public class Polygon extends Shape {
 
     private Point[] points;
 

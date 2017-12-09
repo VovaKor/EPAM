@@ -5,12 +5,12 @@ import ua.epam.Validator;
 import static ua.epam.Constants.COLOR;
 import static ua.epam.Validator.isTriangleValid;
 
-public class Triangle extends Shape implements Cloneable{
+public class Triangle extends Shape {
     private Point apexA, apexB, apexC;
     private Line sideAB, sideAC, sideBC;
 
     public Triangle(Point apexA, Point apexB, Point apexC) {
-        if(isTriangleValid(apexA, apexB, apexC))
+        if(!isTriangleValid(apexA, apexB, apexC))
             throw new IllegalArgumentException("Points on one line");
         this.apexA = apexA;
         this.apexB = apexB;

@@ -23,11 +23,10 @@ public class Validator {
         Line line3 = new Line(a, c);
 
         if (line1.getLength() + line2.getLength() > line3.getLength()
-                || line1.getLength() + line3.getLength() > line2.getLength()
-                || line2.getLength() + line3.getLength() > line1.getLength()) {
+                && line1.getLength() + line3.getLength() > line2.getLength()
+                && line2.getLength() + line3.getLength() > line1.getLength()) {
             return true;
         }
         return false;
-
     }
 }
