@@ -1,4 +1,72 @@
 INFO - DOM builder fetched all papers
-INFO - DOM builder fetched all papers
-09.12.2017 16:04:32 INFO  com.korobko.builders.XmlBuilder - SAX builder fetched all papers
+15.12.2017 09:22:14 INFO  com.korobko.builders.XmlBuilder - DOM builder fetched all papers
+INFO - StAX builder fetched all papers
+INFO - StAX builder fetched all papers
+15.12.2017 09:22:14 INFO  com.korobko.builders.XmlBuilder - StAX builder fetched all papers
 ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 09:22:14 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 09:22:14 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+15.12.2017 09:22:14 INFO  com.korobko.builders.XmlBuilder - SAX builder fetched all papers
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 09:22:14 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 09:22:14 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+INFO - DOM builder fetched all papers
+15.12.2017 17:05:13 INFO  com.korobko.builders.XmlBuilder - DOM builder fetched all papers
+INFO - StAX builder fetched all papers
+INFO - StAX builder fetched all papers
+15.12.2017 17:05:13 INFO  com.korobko.builders.XmlBuilder - StAX builder fetched all papers
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 17:05:13 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 17:05:13 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+INFO - SAX builder fetched all papers
+15.12.2017 17:05:13 INFO  com.korobko.builders.XmlBuilder - SAX builder fetched all papers
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 17:05:13 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+ERROR - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.
+15.12.2017 17:05:13 ERROR com.korobko - 3 : 62 - cvc-complex-type.2.4.a: Invalid content was found starting with element 'papers'. One of '{paper}' is expected.

@@ -59,11 +59,30 @@ public class TaskMain {
         } catch (InvalidObjectException e) {
             e.printStackTrace();
         }
-        if (shapes.containsAll(deserializedShapes)) {
+        // Positive scenario
+        if (deserializedShapes.containsAll(shapes)) {
             System.out.println("Deserialization was correct");
         } else {
             System.out.println("Deserialization was incorrect");
         }
+
+        // Negative scenario
+        List<Shape> emptyList = new ArrayList<>();
+        if (emptyList.containsAll(shapes)) {
+            System.out.println("Deserialization was correct");
+        } else {
+            System.out.println("Deserialization was incorrect");
+        }
+
+        // Negative scenario
+        List<Shape> oneElementList = new ArrayList<>();
+        oneElementList.add(p1);
+        if (oneElementList.containsAll(shapes)) {
+            System.out.println("Deserialization was correct");
+        } else {
+            System.out.println("Deserialization was incorrect");
+        }
+
 
     }
 

@@ -4,6 +4,7 @@ import com.korobko.models.Characteristics;
 import com.korobko.models.Paper;
 import com.korobko.models.PeriodicalType;
 import com.korobko.utils.PaperEnum;
+import com.korobko.utils.Validator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -13,6 +14,9 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.korobko.utils.Constants.PATH_TO_SCHEMA;
+import static com.korobko.utils.Constants.PATH_TO_XML;
 
 /**
  * @author Vova Korobko
@@ -24,12 +28,16 @@ public class PaperSAXBuilder extends XmlBuilder<Paper> {
 
     @Override
     public Set<Paper> buildObjectsFromXml(String path) {
-        sh = new PaperHandler();
-        try {
 
-            reader = XMLReaderFactory.createXMLReader();
-            reader.setContentHandler(sh);
-            reader.parse(path);
+        try {
+            if (Validator.validateXMLwithXSD(path, PATH_TO_SCHEMA)) {
+                sh = new PaperHandler();
+                reader = XMLReaderFactory.createXMLReader();
+                reader.setContentHandler(sh);
+                reader.parse(path);
+            } else {
+                return null;
+            }
 
         } catch (SAXException e) {
             logger.error("Parsing failure: ", e);

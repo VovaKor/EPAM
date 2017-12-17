@@ -1,17 +1,5 @@
 package com.korobko;
 
-import com.korobko.models.Characteristics;
-import com.korobko.models.Paper;
-import com.korobko.models.PaperStore;
-import com.korobko.models.PeriodicalType;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.File;
-
-import static com.korobko.utils.Constants.PATH_TO_XML;
-
 /**
  * 1. Создать файл XML и соответствующую ему схему XSD.
  * 2. При разработке XSD использовать простые и комплексные типы,
@@ -36,7 +24,6 @@ import static com.korobko.utils.Constants.PATH_TO_XML;
  * журналов).
  * Корневой элемент назвать Paper.
  *
- * стр 767 log4j JAVA_Methods_Programming_v2.march2015
  * в таск 3 xml добавить свои Exception
  * логирование в файл уровни INFO и ERROR
  *

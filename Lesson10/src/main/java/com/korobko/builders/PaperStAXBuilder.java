@@ -4,6 +4,7 @@ import com.korobko.models.Characteristics;
 import com.korobko.models.Paper;
 import com.korobko.models.PeriodicalType;
 import com.korobko.utils.PaperEnum;
+import com.korobko.utils.Validator;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -15,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Set;
 
+import static com.korobko.utils.Constants.PATH_TO_SCHEMA;
+
 
 /**
  * @author Vova Korobko
@@ -24,26 +27,31 @@ public class PaperStAXBuilder extends XmlBuilder<Paper> {
 
     @Override
     public Set<Paper> buildObjectsFromXml(String path) {
-        inputFactory = XMLInputFactory.newInstance();
+
         FileInputStream inputStream = null;
         XMLStreamReader reader;
         String name;
         try {
-            inputStream = new FileInputStream(new File(path));
-            reader = inputFactory.createXMLStreamReader(inputStream);
-            // StAX parsing
-            while (reader.hasNext()) {
-                int type = reader.next();
-                if (type == XMLStreamConstants.START_ELEMENT) {
-                    name = reader.getLocalName();
-                    if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.PAPER) {
-                        Paper paper = buildPaper(reader);
-                        papers.add(paper);
+            if (Validator.validateXMLwithXSD(path, PATH_TO_SCHEMA)) {
+                inputFactory = XMLInputFactory.newInstance();
+                inputStream = new FileInputStream(new File(path));
+                reader = inputFactory.createXMLStreamReader(inputStream);
+
+                // StAX parsing
+                while (reader.hasNext()) {
+                    int type = reader.next();
+                    if (type == XMLStreamConstants.START_ELEMENT) {
+                        name = reader.getLocalName();
+                        if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.PAPER) {
+                            Paper paper = buildPaper(reader);
+                            papers.add(paper);
+                        }
                     }
                 }
+                logger.info("StAX builder fetched all papers");
+                return papers;
             }
-            logger.info("StAX builder fetched all papers");
-            return papers;
+
         } catch (XMLStreamException ex) {
             logger.error("StAX parsing error! ", ex);
         } catch (FileNotFoundException ex) {

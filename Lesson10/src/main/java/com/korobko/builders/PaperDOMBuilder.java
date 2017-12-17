@@ -3,6 +3,7 @@ package com.korobko.builders;
 import com.korobko.models.Characteristics;
 import com.korobko.models.Paper;
 import com.korobko.models.PeriodicalType;
+import com.korobko.utils.Validator;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
@@ -10,6 +11,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.Set;
+
+import static com.korobko.utils.Constants.*;
 
 /**
  * @author Vova Korobko
@@ -22,10 +25,17 @@ public class PaperDOMBuilder extends XmlBuilder<Paper> {
     public Set<Paper> buildObjectsFromXml(String path) {
 
         try {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            buildSetPapers(path);
+
+            if (Validator.validateXMLwithXSD(path, PATH_TO_SCHEMA)) {
+                DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+                buildSetPapers(path);
+            } else {
+                return null;
+            }
+
         } catch (ParserConfigurationException e) {
+            e.printStackTrace();
         }
         return papers;
     }

@@ -55,10 +55,10 @@ public class XmlParserTest {
         assertEquals(store.getPapers(), resultSet);
     }
     @Test
-    public void parseXml_paperDomBuilderInvalidXml_setsNotEqual() {
+    public void parseXml_paperDomBuilderInvalidXml_setIsNull() {
         XmlParser<Paper> parser = new XmlParser<>(ValidatorTest.INVALID_XML);
         Set<Paper> resultSet = parser.parseXml(new PaperDOMBuilder());
-        assertNotEquals(store.getPapers(), resultSet);
+        assertNull(resultSet);
     }
     @Test
     public void parseXml_paperSAXBuilderValidXml_setsEqual() {
@@ -66,11 +66,11 @@ public class XmlParserTest {
         Set<Paper> resultSet = parser.parseXml(new PaperSAXBuilder());
         assertEquals(store.getPapers(), resultSet);
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void parseXml_paperSAXBuilderInvalidXmlTag_throwsException() {
+    @Test
+    public void parseXml_paperSAXBuilderInvalidXmlTag_setIsNull() {
         XmlParser<Paper> parser = new XmlParser<>(ValidatorTest.INVALID_XML);
-        parser.parseXml(new PaperSAXBuilder());
-
+        Set<Paper> result = parser.parseXml(new PaperSAXBuilder());
+        assertNull(result);
     }
     @Test
     public void parseXml_paperStAXBuilderValidXml_setsEqual() {
@@ -78,10 +78,10 @@ public class XmlParserTest {
         Set<Paper> resultSet = parser.parseXml(new PaperStAXBuilder());
         assertEquals(store.getPapers(), resultSet);
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void parseXml_paperStAXBuilderInvalidXmlTag_throwsException() {
+    @Test
+    public void parseXml_paperStAXBuilderInvalidXmlTag_setIsNull() {
         XmlParser<Paper> parser = new XmlParser<>(ValidatorTest.INVALID_XML);
-        parser.parseXml(new PaperStAXBuilder());
-
+        Set<Paper> result = parser.parseXml(new PaperStAXBuilder());
+        assertNull(result);
     }
 }
