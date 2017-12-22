@@ -1,4 +1,6 @@
-import main.java.ua.epam.utils.ConsolePrinter;
+package src;
+
+import src.utils.ConsolePrinter;
 
 /**
  * Упорядочить одномерный масив вначале отрицательные по возрастанию затем положительные по убыванию.

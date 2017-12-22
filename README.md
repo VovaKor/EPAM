@@ -1,2 +1,2 @@
-# EPAM
-Test tasks for EPAM
+# Univer external course
+Test tasks for external course
