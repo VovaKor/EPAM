@@ -1,0 +1,148 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="vova (generated)" id="1514460151919-1">
+        <createTable tableName="appointments">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="employee_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bus_id" type="VARCHAR(17)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_on" type="TIMESTAMP(26)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="approved_on" type="TIMESTAMP(26)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-2">
+        <createTable tableName="bus_models">
+            <column autoIncrement="true" name="model_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="model_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-3">
+        <createTable tableName="buses">
+            <column name="vin" type="VARCHAR(17)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="registr_number" type="VARCHAR(16)"/>
+            <column name="model_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_number" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-4">
+        <createTable tableName="employees">
+            <column autoIncrement="true" name="employee_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role_id" type="SMALLINT"/>
+            <column name="email" type="VARCHAR(125)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-5">
+        <createTable tableName="names">
+            <column name="employee_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patronymic" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-6">
+        <createTable tableName="roles">
+            <column name="role_id" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-7">
+        <createTable tableName="routes">
+            <column name="route_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="begin_point" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_point" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-8">
+        <addPrimaryKey columnNames="vin" constraintName="PRIMARY" tableName="buses"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-9">
+        <addPrimaryKey columnNames="employee_id" constraintName="PRIMARY" tableName="names"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-10">
+        <addPrimaryKey columnNames="role_id" constraintName="PRIMARY" tableName="roles"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-11">
+        <addPrimaryKey columnNames="route_number" constraintName="PRIMARY" tableName="routes"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-12">
+        <createIndex indexName="FK_bus_models" tableName="buses">
+            <column name="model_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-13">
+        <createIndex indexName="FK_buses" tableName="appointments">
+            <column name="bus_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-14">
+        <createIndex indexName="FK_employees" tableName="appointments">
+            <column name="employee_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-15">
+        <createIndex indexName="FK_roles" tableName="employees">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-16">
+        <createIndex indexName="FK_routes" tableName="buses">
+            <column name="route_number"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-17">
+        <addForeignKeyConstraint baseColumnNames="model_id" baseTableName="buses" constraintName="FK_bus_models" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="model_id" referencedTableName="bus_models"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-18">
+        <addForeignKeyConstraint baseColumnNames="bus_id" baseTableName="appointments" constraintName="FK_buses" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="vin" referencedTableName="buses"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-19">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="appointments" constraintName="FK_employees" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employees"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-20">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="names" constraintName="FK_names" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employees"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-21">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="employees" constraintName="FK_roles" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="roles"/>
+    </changeSet>
+    <changeSet author="vova (generated)" id="1514460151919-22">
+        <addForeignKeyConstraint baseColumnNames="route_number" baseTableName="buses" constraintName="FK_routes" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="route_number" referencedTableName="routes"/>
+    </changeSet>
+</databaseChangeLog>
