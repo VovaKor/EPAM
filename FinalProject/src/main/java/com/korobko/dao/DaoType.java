@@ -4,7 +4,13 @@ package com.korobko.dao;
  * @author Vova Korobko
  */
 public enum DaoType {
-    BUS("BusDao"), EMPLOYEE("EmployeeDao");
+    BUS("BusDao"),
+    EMPLOYEE("EmployeeDao"),
+    ROUTE("RouteDao"),
+    APPOINTMENT("AppointmentDao"),
+    NAMES("NamesDao"),
+    ROLES("RolesDao"),
+    BUS_MODEL("BusModelDao");
 
     private String name;
 

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group btn-group-justified">
+            <form method="POST" action="" class="inline">
+                <input type="hidden" name="command" value="show_employees">
+                <button type="submit" class="btn btn-primary">
+                    Manage employees
+                </button>
+            </form>
+            <form method="POST" action="" class="inline">
+                <input type="hidden" name="command" value="show_routes">
+                <button type="submit" class="btn btn-primary">
+                    Manage routes
+                </button>
+            </form>
+            <form method="POST" action="" class="inline">
+                <input type="hidden" name="command" value="show_bus_models">
+                <button type="submit" class="btn btn-primary">
+                    Manage bus models
+                </button>
+            </form>
+            <form method="POST" action="" class="inline">
+                <input type="hidden" name="command" value="show_buses">
+                <button type="submit" class="btn btn-primary">
+                    Manage buses
+                </button>
+            </form>
+            <form method="POST" action="" class="inline">
+                <input type="hidden" name="command" value="profile">
+                <button type="submit" class="btn btn-primary">
+                    My profile
+                </button>
+            </form>
+            <form method="POST" action="" class="inline">
+                <input type="hidden" name="command" value="logout">
+                <button type="submit" class="btn btn-primary">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

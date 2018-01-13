@@ -11,10 +11,10 @@
             <column name="bus_id" type="VARCHAR(17)">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_on" type="TIMESTAMP(26)">
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_on" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="approved_on" type="TIMESTAMP(26)"/>
+            <column name="approved_on" type="TIMESTAMP" value="NULL" defaultValue="NULL" />
         </createTable>
     </changeSet>
     <changeSet author="vova (generated)" id="1514460151919-2">
@@ -48,7 +48,7 @@
             <column name="email" type="VARCHAR(125)">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="VARCHAR(512)">
+            <column name="password" type="VARCHAR(128)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -131,7 +131,7 @@
         <addForeignKeyConstraint baseColumnNames="model_id" baseTableName="buses" constraintName="FK_bus_models" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="model_id" referencedTableName="bus_models"/>
     </changeSet>
     <changeSet author="vova (generated)" id="1514460151919-18">
-        <addForeignKeyConstraint baseColumnNames="bus_id" baseTableName="appointments" constraintName="FK_buses" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="vin" referencedTableName="buses"/>
+        <addForeignKeyConstraint baseColumnNames="bus_id" baseTableName="appointments" constraintName="FK_buses" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="CASCADE" referencedColumnNames="vin" referencedTableName="buses"/>
     </changeSet>
     <changeSet author="vova (generated)" id="1514460151919-19">
         <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="appointments" constraintName="FK_employees" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employees"/>
@@ -143,6 +143,6 @@
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="employees" constraintName="FK_roles" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="roles"/>
     </changeSet>
     <changeSet author="vova (generated)" id="1514460151919-22">
-        <addForeignKeyConstraint baseColumnNames="route_number" baseTableName="buses" constraintName="FK_routes" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="route_number" referencedTableName="routes"/>
+        <addForeignKeyConstraint baseColumnNames="route_number" baseTableName="buses" constraintName="FK_routes" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="CASCADE" referencedColumnNames="route_number" referencedTableName="routes"/>
     </changeSet>
 </databaseChangeLog>

@@ -16,6 +16,11 @@
             <column name="role_id" value="3"></column>
             <column name="role" value="DIRECTOR"></column>
         </insert>
+        <insert tableName="employees">
+            <column name="role_id" value="3"></column>
+            <column name="email" value="director@director.com"></column>
+            <column name="password" value="376785415685b3ea67620da49571f303ea750dd30e6543f001d3d629115dcc5e3bcf52af35c6c34d10fa27f79e11e6482cc3e725d7fb856ae127d54a7c5d2d22"></column>
+        </insert>
         <rollback/>
     </changeSet>
 </databaseChangeLog>
