@@ -38,7 +38,7 @@ public class NamesDao implements Dao {
                 names.setPatronymic(resultSet.getString(PATRONYMIC));
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception finding names by employee id", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }
@@ -58,7 +58,7 @@ public class NamesDao implements Dao {
             preparedStatement.setString(3, lastName);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while inserting employee names", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }

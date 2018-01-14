@@ -25,9 +25,9 @@ public enum ResourceManager {
     ResourceBundle resourceBundle;
 
     /**
-     * todo
-     * @param key
-     * @return
+     * Gets a string for the given key from this resource bundle
+     * @param key the key for the desired string
+     * @return the string for the given key
      */
     public String getProperty(String key) {
         return resourceBundle.getString(key);

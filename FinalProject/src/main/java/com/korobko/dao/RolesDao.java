@@ -36,7 +36,7 @@ public class RolesDao implements Dao {
                 positions.add(position);
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting subordinate positions", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }

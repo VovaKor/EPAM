@@ -11,6 +11,8 @@ import com.korobko.utils.Constants;
 import com.korobko.utils.HashGenerator;
 import com.korobko.utils.InputValidator;
 import com.korobko.utils.connection.TransactionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.Objects;
  */
 public enum EmployeeService {
     INSTANCE;
-
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private EmployeeDao employeeDao;
     private NamesDao namesDao;
 
@@ -63,11 +65,11 @@ public enum EmployeeService {
             result = namesDao.insertNames(firstName, patronymic, lastName);
             TransactionManager.endTransaction();
         } catch (TransactionException | SQLException e) {
-            //todo
+            logger.error("Exception register employee", e);
             try {
                 TransactionManager.rollbackTransaction();
             } catch (TransactionException | SQLException e1) {
-                //todo
+                logger.error("Exception rollback registration", e);
             }
         }
         return result;
@@ -102,11 +104,11 @@ public enum EmployeeService {
             }
             TransactionManager.endTransaction();
         } catch (TransactionException | SQLException e) {
-            //todo
+            logger.error("Exception update employee", e);
             try {
                 TransactionManager.rollbackTransaction();
             } catch (TransactionException | SQLException e1) {
-                //todo
+                logger.error("Exception rollback employee renewal", e);
             }
         }
         return result;

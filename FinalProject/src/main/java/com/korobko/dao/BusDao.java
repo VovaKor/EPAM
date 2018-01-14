@@ -62,7 +62,7 @@ public class BusDao implements Dao {
             }
 
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting all buses", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -94,7 +94,7 @@ public class BusDao implements Dao {
             }
 
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting bus by VIN", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -113,7 +113,7 @@ public class BusDao implements Dao {
             statement.setString(2, vin);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception bus route renewal", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -135,7 +135,7 @@ public class BusDao implements Dao {
             }
 
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting free bus ids", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -155,7 +155,7 @@ public class BusDao implements Dao {
             statement.setLong(3, modelId);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while inserting bus", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -180,7 +180,7 @@ public class BusDao implements Dao {
             statement.setString(3, oldVin);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while updating bus params", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -201,7 +201,7 @@ public class BusDao implements Dao {
             statement.setString(4, oldVin);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while updating full bus", e);
         } finally {
             closeResources(wrapper, statement);
         }

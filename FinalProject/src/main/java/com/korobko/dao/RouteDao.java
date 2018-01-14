@@ -44,7 +44,7 @@ public class RouteDao implements Dao {
             }
 
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting routes", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -64,7 +64,7 @@ public class RouteDao implements Dao {
             statement.setString(3, end);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while inserting route", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -82,7 +82,7 @@ public class RouteDao implements Dao {
             statement.setInt(1, newRNumber);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while deleting route", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -102,7 +102,7 @@ public class RouteDao implements Dao {
             statement.setInt(3, oldRNumber);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while updating route points", e);
         } finally {
             closeResources(wrapper, statement);
         }
@@ -123,7 +123,7 @@ public class RouteDao implements Dao {
             statement.setInt(4, oldRNumber);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while updating full route", e);
         } finally {
             closeResources(wrapper, statement);
         }

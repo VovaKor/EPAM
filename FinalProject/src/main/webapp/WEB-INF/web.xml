@@ -15,6 +15,10 @@
     <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>com.korobko.servlets.MainServlet</servlet-class>
+        <init-param>
+            <param-name>log4j-properties-location</param-name>
+            <param-value>WEB-INF/classes/properties/log4j.properties</param-value>
+        </init-param>    
     </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>

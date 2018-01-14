@@ -2,6 +2,8 @@ package com.korobko.dao;
 
 import com.korobko.utils.connection.ConnectionWrapper;
 import com.korobko.utils.connection.TransactionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,6 +13,7 @@ import java.util.Objects;
  * @author Vova Korobko
  */
 public interface Dao {
+    Logger logger = LoggerFactory.getLogger(Dao.class);
     default void closeResources(ConnectionWrapper connectionWrapper, PreparedStatement preparedStatement) {
         try {
             if (Objects.nonNull(preparedStatement)) {
@@ -20,7 +23,7 @@ public interface Dao {
                 connectionWrapper.close();
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception close resources", e);
         }
     }
 
@@ -40,7 +43,7 @@ public interface Dao {
             preparedStatement.setString(1, parameter);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception execute sql", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }
@@ -62,7 +65,7 @@ public interface Dao {
             preparedStatement.setLong(1, id);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception execute sql", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }
@@ -87,7 +90,7 @@ public interface Dao {
             preparedStatement.setLong(2, id);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception execute sql", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }

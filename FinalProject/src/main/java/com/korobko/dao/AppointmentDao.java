@@ -63,7 +63,7 @@ public class AppointmentDao implements Dao {
                 appointments.add(appointment);
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting appointments with free drivers", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }
@@ -93,7 +93,7 @@ public class AppointmentDao implements Dao {
                 appointment.setApproved(DateTime.timestampToLocalDateTime(resultSet.getTimestamp(APPROVED_ON)));
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting appointment by id", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }
@@ -123,7 +123,7 @@ public class AppointmentDao implements Dao {
                 appointment.setApproved(DateTime.timestampToLocalDateTime(resultSet.getTimestamp(APPROVED_ON)));
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting appointment by employee id", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }
@@ -142,7 +142,7 @@ public class AppointmentDao implements Dao {
             preparedStatement.setString(2, busId);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while inserting appointment", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }

@@ -41,7 +41,7 @@ public class BusModelDao implements Dao {
                 models.add(busModel);
             }
         } catch (SQLException e) {
-            //todo
+            logger.error("Exception while getting bus models", e);
         } finally {
             closeResources(connectionWrapper, preparedStatement);
         }

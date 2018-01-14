@@ -13,9 +13,11 @@ public class CommandFactory {
     private CommandFactory() {}
 
     /**
-     * TODO
-     * @param request
-     * @return
+     * Defines a Command from given request
+     * @param request an {@link HttpServletRequest} object that
+     *                  contains the request the client has made
+     *                  of the servlet
+     * @return a Command object
      */
     public static Command defineCommand(HttpServletRequest request) {
         Command current = new EmptyCommand();

@@ -18,4 +18,6 @@ public interface Constants {
     String PATH_PAGE_LOGIN = "path.page.login";
     String PATH_PAGE_ERROR_403 = "path.page.error_403";
     String MESSAGE_ERROR_EMAIL_EXIST = "message.error.email.exist";
+    String SERVLET_ROOT = "/";
+    String LOG4J_PROPERTIES_LOCATION = "log4j-properties-location";
 }

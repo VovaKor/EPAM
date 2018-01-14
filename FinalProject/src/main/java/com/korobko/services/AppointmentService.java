@@ -7,6 +7,9 @@ import com.korobko.entities.Employee;
 import com.korobko.entities.Names;
 import com.korobko.exceptions.TransactionException;
 import com.korobko.utils.connection.TransactionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +20,7 @@ import static com.korobko.utils.Constants.*;
  */
 public enum AppointmentService {
     INSTANCE;
-
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final AppointmentDao appointmentDao;
     private final NamesDao namesDao;
     private final BusDao busDao;
@@ -78,11 +81,11 @@ public enum AppointmentService {
             TransactionManager.endTransaction();
             return result;
         } catch (SQLException | TransactionException e) {
+            logger.error("Exception update appointment", e);
             try {
                 TransactionManager.rollbackTransaction();
-                //todo
             } catch (TransactionException | SQLException e1) {
-                //todo
+                logger.error("Exception rollback appointment", e);
             }
         }
         return ERROR_CODE;
@@ -114,11 +117,11 @@ public enum AppointmentService {
             }
             TransactionManager.endTransaction();
         } catch (TransactionException | SQLException e) {
-            //todo
+            logger.error("Exception approve appointment", e);
             try {
                 TransactionManager.rollbackTransaction();
             } catch (TransactionException | SQLException e1) {
-                //todo
+                logger.error("Exception rollback approval", e);
             }
         }
         return result;
