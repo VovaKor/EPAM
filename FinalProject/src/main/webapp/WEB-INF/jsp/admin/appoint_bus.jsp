@@ -20,7 +20,7 @@
     </div>
 
     <div class="bs-form">
-        <form name="appointForm" action="" method="POST" >
+        <form name="appointForm" action="do" method="POST" >
             <input type="hidden" name="command" value="update_driver_bus" />
             <input type="hidden" name="employee_id" value="<c:out value="${app.employee.employeeId}"/>" />
             <div class="form-group">

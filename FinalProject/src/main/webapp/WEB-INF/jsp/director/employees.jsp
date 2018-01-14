@@ -44,7 +44,7 @@
                     </select>
                 </td>
                 <td>
-                    <form id="<c:out value="${emp.employeeId}" />" method="POST" action="" class="inline">
+                    <form id="<c:out value="${emp.employeeId}" />" method="POST" action="do" class="inline">
                         <input type="hidden" name="command" value="update_position">
                         <input type="hidden" name="employee_id" value="<c:out value="${emp.employeeId}" />">
                         <button type="submit" class="link-button">

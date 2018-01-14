@@ -10,7 +10,7 @@
         <h1>CAR FLEET</h1>
     </div>
     <div class="bs-form">
-        <form name="loginForm" method="POST" action="">
+        <form name="loginForm" method="POST" action="do">
             <input type="hidden" name="command" value="login" />
             <div class="form-group">
                 <label>Email:</label>
@@ -30,7 +30,7 @@
             <button type="submit" class="btn btn-primary">Log in</button>
 
         </form>
-        <form method="POST" action="" class="inline">
+        <form method="POST" action="do" class="inline">
             <input type="hidden" name="command" value="show_signup_view">
             <button type="submit" class="link-button">
                 Register

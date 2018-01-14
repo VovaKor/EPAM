@@ -3,7 +3,7 @@
   Date: 01.01.18  
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Error Status - 500</title>

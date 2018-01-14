@@ -4,7 +4,7 @@
 --%>
 
 <div class="bs-form">
-    <form method="POST" action="">
+    <form method="POST" action="do">
         <input type="hidden" name="command" value="update_profile" />
         <div class="form-group">
             <label>Your current Email:</label>

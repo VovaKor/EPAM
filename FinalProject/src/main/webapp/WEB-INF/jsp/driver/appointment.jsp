@@ -21,7 +21,7 @@
     </div>
 
     <div class="bs-form">
-        <form name="appointForm" action="" method="POST" >
+        <form name="appointForm" action="do" method="POST" >
             <input type="hidden" name="command" value="approve_appointment" />
             <input type="hidden" name="id" value="<c:out value="${app.appointmentId}"/>" />
             <div class="form-group">

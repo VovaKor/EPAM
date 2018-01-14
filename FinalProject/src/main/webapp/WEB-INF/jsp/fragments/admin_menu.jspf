@@ -1,25 +1,25 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="btn-group btn-group-justified">
-            <form method="POST" action="" class="inline">
+            <form method="POST" action="do" class="inline">
                 <input type="hidden" name="command" value="admin_buses">
                 <button type="submit" class="btn btn-primary">
                     Appoint route
                 </button>
             </form>
-            <form method="POST" action="" class="inline">
+            <form method="POST" action="do" class="inline">
                 <input type="hidden" name="command" value="admin_drivers">
                 <button type="submit" class="btn btn-primary">
                     Appoint driver
                 </button>
             </form>
-            <form method="POST" action="" class="inline">
+            <form method="POST" action="do" class="inline">
                 <input type="hidden" name="command" value="profile">
                 <button type="submit" class="btn btn-primary">
                     My profile
                 </button>
             </form>
-            <form method="POST" action="" class="inline">
+            <form method="POST" action="do" class="inline">
                 <input type="hidden" name="command" value="logout">
                 <button type="submit" class="btn btn-primary">
                     Logout

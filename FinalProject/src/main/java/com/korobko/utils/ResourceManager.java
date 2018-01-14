@@ -8,17 +8,17 @@ import java.util.ResourceBundle;
 public enum ResourceManager {
     MESSAGES {
         {
-            this.resourceBundle = ResourceBundle.getBundle("resources.properties.messages");
+            this.resourceBundle = ResourceBundle.getBundle("properties.messages");
         }
     },
     CONFIGURATION {
         {
-            this.resourceBundle = ResourceBundle.getBundle("resources.properties.config");
+            this.resourceBundle = ResourceBundle.getBundle("properties.config");
         }
     },
     QUERIES{
         {
-            this.resourceBundle = ResourceBundle.getBundle("resources.properties.db_queries");
+            this.resourceBundle = ResourceBundle.getBundle("properties.db_queries");
         }
     };
 

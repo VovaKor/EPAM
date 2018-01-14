@@ -38,7 +38,7 @@
                 <td><c:out value="${ fdt:formatLocalDateTime(app.created) }" /></td>
                 <td><c:out value="${ fdt:formatLocalDateTime(app.approved) }" /></td>
                 <td>
-                    <form method="POST" action="" class="inline">
+                    <form method="POST" action="do" class="inline">
                         <input type="hidden" name="command" value="appoint_bus">
                         <input type="hidden" name="employee_id" value="<c:out value="${app.employee.employeeId}" />">
                         <input type="hidden" name="id" value="<c:out value="${app.appointmentId}" />">

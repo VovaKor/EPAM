@@ -28,7 +28,7 @@
                 <td><c:out value="${ bus.busModel.modelName }" /></td>
                 <td><c:out value="${ bus.route.routeNumber }" /></td>
                 <td>
-                    <form method="POST" action="" class="inline">
+                    <form method="POST" action="do" class="inline">
                         <input type="hidden" name="command" value="appoint_route">
                         <input type="hidden" name="vin" value="<c:out value="${bus.VIN}" />">
                         <button type="submit" class="link-button">

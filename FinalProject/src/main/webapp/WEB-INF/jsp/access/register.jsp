@@ -15,7 +15,7 @@
         <h1>CAR FLEET</h1>
     </div>
     <div class="bs-form">
-        <form method="POST" action="">
+        <form method="POST" action="do">
             <input type="hidden" name="command" value="register" />
             <div class="form-group">
                 <label>Email:</label>

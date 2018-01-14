@@ -49,7 +49,7 @@ public enum SecurityConfiguration {
 
     public String getSecurityLevel(String command){
         if (Objects.isNull(command) || command.isEmpty()) {
-            return null;
+            return SECURITY_LEVEL_ALL;
         }
         return grant.get(CommandEnum.valueOf(command.toUpperCase()));
     }

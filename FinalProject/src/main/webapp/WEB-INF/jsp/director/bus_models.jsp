@@ -28,7 +28,7 @@
         <tr>
             <td><input form="create" type="text" name="model_name" required/></td>
             <td>
-                <form id="create" method="POST" action="" class="inline">
+                <form id="create" method="POST" action="do" class="inline">
                     <input type="hidden" name="command" value="create_bus_model">
                     <button type="submit" class="link-button">
                         Create bus model
@@ -40,7 +40,7 @@
             <tr>
                 <td><input form="<c:out value="${model.modelId}" />" type="text" name="model_name" value="<c:out value="${ model.modelName }" />" /></td>
                 <td>
-                    <form id="<c:out value="${model.modelId}" />" method="POST" action="" class="inline">
+                    <form id="<c:out value="${model.modelId}" />" method="POST" action="do" class="inline">
                         <input type="hidden" name="command" value="update_bus_model">
                         <input type="hidden" name="model_id" value="<c:out value="${model.modelId}" />">
                         <button type="submit" class="link-button">

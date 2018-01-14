@@ -19,7 +19,7 @@
     </div>
 
     <div class="bs-form">
-        <form name="appointForm" action="" method="POST" >
+        <form name="appointForm" action="do" method="POST" >
             <input type="hidden" name="command" value="update_bus_route" />
             <input type="hidden" name="vin" value="<c:out value="${bus.VIN}"/>" />
             <div class="form-group">

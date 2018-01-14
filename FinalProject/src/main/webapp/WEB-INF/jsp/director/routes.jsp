@@ -31,7 +31,7 @@
             <td><input form="create" type="text" name="begin_point" required/></td>
             <td><input form="create" type="text" name="end_point" required/></td>
             <td>
-                <form id="create" method="POST" action="" class="inline">
+                <form id="create" method="POST" action="do" class="inline">
                     <input type="hidden" name="command" value="create_route">
                     <button type="submit" class="link-button">
                         Create route
@@ -45,7 +45,7 @@
                 <td><input form="<c:out value="${route.routeNumber}" />" type="text" name="begin_point" value="<c:out value="${ route.beginPoint }" />" required/></td>
                 <td><input form="<c:out value="${route.routeNumber}" />" type="text" name="end_point" value="<c:out value="${ route.endPoint }" />" required/></td>
                 <td>
-                    <form id="<c:out value="${route.routeNumber}" />" method="POST" action="" class="inline">
+                    <form id="<c:out value="${route.routeNumber}" />" method="POST" action="do" class="inline">
                         <input type="hidden" name="command" value="update_route">
                         <input type="hidden" name="old_route_number" value="<c:out value="${route.routeNumber}" />">
                         <button type="submit" class="link-button">

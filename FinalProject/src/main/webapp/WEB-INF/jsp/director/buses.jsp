@@ -37,7 +37,7 @@
                 </select>
             </td>
             <td>
-                <form id="create" method="POST" action="" class="inline">
+                <form id="create" method="POST" action="do" class="inline">
                     <input type="hidden" name="command" value="create_bus">
                     <button type="submit" class="link-button">
                         Create bus
@@ -60,7 +60,7 @@
                     </select>
                 </td>
                 <td>
-                    <form id="<c:out value="${bus.VIN}" />" method="POST" action="" class="inline">
+                    <form id="<c:out value="${bus.VIN}" />" method="POST" action="do" class="inline">
                         <input type="hidden" name="command" value="update_bus">
                         <input type="hidden" name="old_vin" value="<c:out value="${bus.VIN}" />">
                         <button type="submit" class="link-button">
