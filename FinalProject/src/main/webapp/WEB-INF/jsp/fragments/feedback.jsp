@@ -4,9 +4,15 @@
   Created by Vova Korobko.  
   Date: 06.01.18  
 --%>
+<html>
+<head><title>Feedback</title></head>
+<body>
 
 <br/>
 <b>
-${feedbackMessage}
+    ${feedbackMessage}
 </b>
 <br/>
+</body></html>
+
+

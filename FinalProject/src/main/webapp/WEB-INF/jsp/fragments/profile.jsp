@@ -2,7 +2,11 @@
   Created by Vova Korobko.  
   Date: 12.01.18  
 --%>
-
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head><title>Profile</title></head>
+<body>
 <div class="bs-form">
     <form method="POST" action="do">
         <input type="hidden" name="command" value="update_profile" />
@@ -44,3 +48,4 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
+</body></html>

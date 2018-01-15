@@ -17,7 +17,7 @@
         <p>Administrative console: profile</p>
         <p><b>You have to enter your current password to commit changes.</b></p>
     </div>
-    <c:import url="/WEB-INF/jsp/fragments/profile.jspf" charEncoding="utf-8"/>
+    <c:import url="/WEB-INF/jsp/fragments/profile.jsp" charEncoding="utf-8"/>
 </div>
 </body>
 </html>

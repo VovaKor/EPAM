@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label>Bus model name:</label>
-                <label><c:out value="${app.bus.modelName}" /></label>
+                <label><c:out value="${app.bus.busModel.modelName}" /></label>
             </div>
             <div class="form-group">
                 <label>Route number:</label>

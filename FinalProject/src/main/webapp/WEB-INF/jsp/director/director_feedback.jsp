@@ -16,7 +16,7 @@
         <h1>CAR FLEET</h1>
         <p>Director console: action result</p>
         <p>
-            <c:import url="/WEB-INF/jsp/fragments/feedback.jspf" charEncoding="utf-8"/>
+            <c:import url="/WEB-INF/jsp/fragments/feedback.jsp" charEncoding="utf-8"/>
         </p>
     </div>
 

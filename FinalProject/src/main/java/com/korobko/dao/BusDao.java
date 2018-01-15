@@ -7,11 +7,10 @@ import com.korobko.utils.ResourceManager;
 import com.korobko.utils.connection.ConnectionWrapper;
 import com.korobko.utils.connection.TransactionManager;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Vova Korobko
@@ -101,7 +100,7 @@ public class BusDao implements Dao {
         return bus;
     }
 
-    public int updateBusRoute(int number, String vin) {
+    public int updateBusRoute(Integer number, String vin) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
         int result = 0;
@@ -109,7 +108,11 @@ public class BusDao implements Dao {
         try {
             wrapper = TransactionManager.getConnectionWrapper();
             statement = wrapper.getPreparedStatement(sql);
-            statement.setInt(1, number);
+            if (Objects.nonNull(number)) {
+                statement.setInt(1, number);
+            } else {
+                statement.setNull(1, Types.NULL);
+            }
             statement.setString(2, vin);
             result = statement.executeUpdate();
         } catch (SQLException e) {

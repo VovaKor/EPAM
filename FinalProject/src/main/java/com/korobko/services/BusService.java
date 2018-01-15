@@ -35,7 +35,13 @@ public enum BusService {
      * @return
      */
     public int updateBusRoute(String routeNumber, String vin) {
+        if (InputValidator.nonInteger(routeNumber)) {
+            return 0;
+        }
         int number = Integer.valueOf(routeNumber);
+        if (number == 0) {
+            return busDao.updateBusRoute(null, vin);
+        }
         return busDao.updateBusRoute(number, vin);
     }
 

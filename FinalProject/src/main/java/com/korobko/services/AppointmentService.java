@@ -62,22 +62,29 @@ public enum AppointmentService {
 
     public int executeUpdate(String employeeId, String busId) {
         try {
+            int result = 0;
             TransactionManager.beginTransaction();
             Long empId = Long.valueOf(employeeId);
             Appointment appointment = appointmentDao.getPoorAppointmentByEmployeeId(empId);
             if (Objects.isNull(appointment) && busId.isEmpty()) {
+                TransactionManager.endTransaction();
                 return ROWS_AFFECTED;
             }
             if (Objects.isNull(appointment)) {
-                return appointmentDao.insertAppointment(empId, busId);
+                result = appointmentDao.insertAppointment(empId, busId);
+                TransactionManager.endTransaction();
+                return result;
             }
             if (busId.isEmpty()) {
-                return appointmentDao.deleteAppointment(appointment.getAppointmentId());
+                result = appointmentDao.deleteAppointment(appointment.getAppointmentId());
+                TransactionManager.endTransaction();
+                return result;
             }
             if (appointment.getBus().getVIN().equals(busId)) {
+                TransactionManager.endTransaction();
                 return ROWS_AFFECTED;
             }
-            int result = appointmentDao.updateAppointment(appointment.getAppointmentId(), busId);
+            result = appointmentDao.updateAppointment(appointment.getAppointmentId(), busId);
             TransactionManager.endTransaction();
             return result;
         } catch (SQLException | TransactionException e) {
