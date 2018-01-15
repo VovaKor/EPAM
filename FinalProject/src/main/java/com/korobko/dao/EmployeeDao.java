@@ -10,6 +10,7 @@ import com.korobko.utils.connection.TransactionManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -109,7 +110,11 @@ public class EmployeeDao implements Dao {
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
-            preparedStatement.setInt(1, positionId);
+            if (Objects.nonNull(positionId)) {
+                preparedStatement.setInt(1, positionId);
+            } else {
+                preparedStatement.setNull(1, Types.NULL);
+            }
             preparedStatement.setLong(2, empId);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {

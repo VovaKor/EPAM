@@ -2,6 +2,7 @@ package com.korobko.commands;
 
 import com.korobko.dao.DBColumns;
 import com.korobko.entities.Employee;
+import com.korobko.entities.EmployeePosition;
 import com.korobko.services.EmployeeService;
 import com.korobko.utils.ResourceManager;
 import com.korobko.utils.Authentication;
@@ -31,13 +32,15 @@ class LoginCommand implements Command {
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
         if (Authentication.isCredentialsValid(login, pass)) {
             Employee employee = EmployeeService.INSTANCE.getEmployeeByEmail(login);
-
-            if (Objects.nonNull(employee) && Authentication.isPasswordsMatches(pass, employee.getPassword())) {
+            if (Objects.nonNull(employee)
+                    && Objects.nonNull(employee.getPosition())
+                    && Authentication.isPasswordsMatches(pass, employee.getPassword())) {
                 HttpSession session = request.getSession(true);
-                session.setAttribute(DBColumns.ROLE, employee.getPosition().name());
+                EmployeePosition position = employee.getPosition();
+                session.setAttribute(DBColumns.ROLE, position.name());
                 session.setAttribute(DBColumns.EMPLOYEE_ID, employee.getEmployeeId());
-                logger.info("{} has entered the site.", employee.getPosition().name());
-                switch (employee.getPosition()) {
+                logger.info("{} has entered the site.", position.name());
+                switch (position) {
                     case ADMIN:
                         webPageUri = CommandEnum.ADMIN_BUSES.getCurrentCommand().execute(request);
                         break;
@@ -47,11 +50,10 @@ class LoginCommand implements Command {
                     case DIRECTOR:
                         webPageUri = CommandEnum.SHOW_EMPLOYEES.getCurrentCommand().execute(request);
                         break;
-                        default: webPageUri = ResourceManager.CONFIGURATION.getProperty(PATH_PAGE_ERROR_403);
                 }
 
             } else {
-                webPageUri = getLoginErrorUri(request);
+                webPageUri = ResourceManager.CONFIGURATION.getProperty(PATH_PAGE_ERROR_403);
             }
         } else {
             webPageUri = getLoginErrorUri(request);

@@ -42,6 +42,9 @@ public enum EmployeeService {
 
     public int updatePosition(String employeeId, String roleId) {
         Long empId = Long.valueOf(employeeId);
+        if (InputValidator.nonInteger(roleId)) {
+            return 0;
+        }
         Integer positionId = Integer.valueOf(roleId);
         if (positionId == 0) {
             positionId = null;
