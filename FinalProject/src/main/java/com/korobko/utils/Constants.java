@@ -4,6 +4,7 @@ package com.korobko.utils;
  * @author Vova Korobko
  */
 public interface Constants {
+    String PARAM_NAME_LOGIN = "login";
     String PARAM_NAME_COMMAND = "command";
     int ROWS_AFFECTED = 1;
     int ERROR_CODE = -1;

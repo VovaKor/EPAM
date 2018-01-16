@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
+import static com.korobko.dao.DBColumns.PASSWORD;
 import static com.korobko.utils.Constants.*;
 
 /**
  * @author Vova Korobko
  */
 class LoginCommand implements Command {
-    private static final String PARAM_NAME_LOGIN = "login";
-    private static final String PARAM_NAME_PASSWORD = "password";
+
     private static final String MESSAGE_LOGIN_ERROR = "message.error.login";
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -29,13 +29,13 @@ class LoginCommand implements Command {
         String webPageUri = null;
 
         String login = request.getParameter(PARAM_NAME_LOGIN);
-        String pass = request.getParameter(PARAM_NAME_PASSWORD);
+        String pass = request.getParameter(PASSWORD);
         if (Authentication.isCredentialsValid(login, pass)) {
             Employee employee = EmployeeService.INSTANCE.getEmployeeByEmail(login);
             if (Objects.nonNull(employee)
                     && Objects.nonNull(employee.getPosition())
                     && Authentication.isPasswordsMatches(pass, employee.getPassword())) {
-                HttpSession session = request.getSession(true);
+                HttpSession session = request.getSession();
                 EmployeePosition position = employee.getPosition();
                 session.setAttribute(DBColumns.ROLE, position.name());
                 session.setAttribute(DBColumns.EMPLOYEE_ID, employee.getEmployeeId());
