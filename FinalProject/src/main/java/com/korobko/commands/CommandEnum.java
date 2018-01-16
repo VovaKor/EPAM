@@ -128,6 +128,11 @@ public enum CommandEnum {
         {
             this.command = new UpdateBusCommand();
         }
+    },
+    EMPTY {
+        {
+            this.command = new EmptyCommand();
+        }
     };
     Command command;
     Command getCurrentCommand() {

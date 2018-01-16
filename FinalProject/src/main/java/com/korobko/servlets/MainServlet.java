@@ -4,6 +4,8 @@ import com.korobko.commands.Command;
 import com.korobko.commands.CommandFactory;
 
 import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,9 +17,12 @@ import java.util.Objects;
 
 import static com.korobko.utils.Constants.*;
 /**
+ * An entry point of the app
+ *
  * @author Vova Korobko
  */
 public class MainServlet extends HttpServlet {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public void init() throws ServletException {
@@ -26,6 +31,7 @@ public class MainServlet extends HttpServlet {
         if (filename != null) {
             PropertyConfigurator.configure(prefix + filename);
         }
+        logger.info("Application is up and running.");
     }
 
     @Override
@@ -58,4 +64,8 @@ public class MainServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    @Override
+    public void destroy() {
+        logger.info("Application is stopped.");
+    }
 }
