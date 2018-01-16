@@ -24,12 +24,13 @@ public class RolesDao implements Dao {
     public List<EmployeePosition> getSubordinatePositions() {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<EmployeePosition> positions = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_SUBORDINATES_POSITIONS);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             positions = new ArrayList<>();
             while (resultSet.next()) {
                 EmployeePosition position = EmployeePosition.valueOf(resultSet.getString(DBColumns.ROLE));
@@ -38,7 +39,7 @@ public class RolesDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting subordinate positions", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return positions;
     }

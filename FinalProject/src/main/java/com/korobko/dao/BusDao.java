@@ -37,12 +37,13 @@ public class BusDao implements Dao {
     public List<Bus> getAllBuses() {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         List<Bus> buses = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_BUSES);
         try {
             wrapper = TransactionManager.getConnectionWrapper();
             statement = wrapper.getPreparedStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             buses = new ArrayList<>();
             while (resultSet.next()) {
                 Bus bus = new Bus();
@@ -63,7 +64,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting all buses", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, resultSet);
         }
         return buses;
     }
@@ -71,13 +72,14 @@ public class BusDao implements Dao {
     public Bus getBusByVIN(String vin) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         Bus bus = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_BUS_BY_VIN);
         try {
             wrapper = TransactionManager.getConnectionWrapper();
             statement = wrapper.getPreparedStatement(sql);
             statement.setString(1, vin);
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 bus = new Bus();
                 bus.setVIN(vin);
@@ -95,7 +97,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting bus by VIN", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, resultSet);
         }
         return bus;
     }
@@ -118,7 +120,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception bus route renewal", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }
@@ -126,12 +128,13 @@ public class BusDao implements Dao {
     public List<String> findFreeBusIds() {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         List<String> ids = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_FREE_BUS_IDS);
         try {
             wrapper = TransactionManager.getConnectionWrapper();
             statement = wrapper.getPreparedStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             ids = new ArrayList<>();
             while (resultSet.next()) {
                 ids.add(resultSet.getString(DBColumns.VIN));
@@ -140,7 +143,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting free bus ids", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, resultSet);
         }
         return ids;
     }
@@ -160,7 +163,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting bus", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }
@@ -185,7 +188,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while updating bus params", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }
@@ -206,7 +209,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while updating full bus", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }

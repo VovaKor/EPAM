@@ -37,12 +37,13 @@ public class AppointmentDao implements Dao {
     public List<Appointment> getAppointmentsIncludingFreeDrivers() {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<Appointment> appointments = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_APPOINTMENTS_AND_DRIVERS);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             appointments = new ArrayList<>();
             while (resultSet.next()) {
                 Employee employee = new Employee();
@@ -65,7 +66,7 @@ public class AppointmentDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting appointments with free drivers", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return appointments;
     }
@@ -73,13 +74,14 @@ public class AppointmentDao implements Dao {
     public Appointment getPoorAppointmentById(Long appointmentId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Appointment appointment = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_POOR_APPOINTMENT_BY_ID);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
             preparedStatement.setLong(1, appointmentId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 Employee employee = new Employee();
                 employee.setEmployeeId(resultSet.getLong(EMPLOYEE_ID));
@@ -95,7 +97,7 @@ public class AppointmentDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting appointment by id", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return appointment;
     }
@@ -103,13 +105,14 @@ public class AppointmentDao implements Dao {
     public Appointment getPoorAppointmentByEmployeeId(Long employeeId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Appointment appointment = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_POOR_APPOINTMENT_BY_EMPLOYEE_ID);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
             preparedStatement.setLong(1, employeeId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 Employee employee = new Employee();
                 employee.setEmployeeId(employeeId);
@@ -125,7 +128,7 @@ public class AppointmentDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting appointment by employee id", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return appointment;
     }
@@ -144,7 +147,7 @@ public class AppointmentDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting appointment", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }

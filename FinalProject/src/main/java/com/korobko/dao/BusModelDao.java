@@ -27,12 +27,13 @@ public class BusModelDao implements Dao {
     public List<BusModel> getBusModels() {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<BusModel> models = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_BUS_MODELS);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             models = new ArrayList<>();
             while (resultSet.next()) {
                 BusModel busModel = new BusModel();
@@ -43,7 +44,7 @@ public class BusModelDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting bus models", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return models;
     }

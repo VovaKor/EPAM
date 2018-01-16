@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 import static com.korobko.utils.Constants.*;
 /**
@@ -22,7 +21,7 @@ import static com.korobko.utils.Constants.*;
  * @author Vova Korobko
  */
 public class MainServlet extends HttpServlet {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(MainServlet.class);
 
     @Override
     public void init() throws ServletException {

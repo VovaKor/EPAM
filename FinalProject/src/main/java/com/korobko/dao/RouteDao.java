@@ -28,12 +28,13 @@ public class RouteDao implements Dao {
     public List<Route> getRoutes() {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         List<Route> routes = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_ROUTES);
         try {
             wrapper = TransactionManager.getConnectionWrapper();
             statement = wrapper.getPreparedStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             routes = new ArrayList<>();
             while (resultSet.next()) {
                 Route route = new Route();
@@ -46,7 +47,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting routes", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, resultSet);
         }
         return routes;
     }
@@ -66,7 +67,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting route", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }
@@ -84,7 +85,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while deleting route", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }
@@ -104,7 +105,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while updating route points", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }
@@ -125,7 +126,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while updating full route", e);
         } finally {
-            closeResources(wrapper, statement);
+            closeResources(wrapper, statement, null);
         }
         return result;
     }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -14,8 +15,11 @@ import java.util.Objects;
  */
 public interface Dao {
     Logger logger = LoggerFactory.getLogger(Dao.class);
-    default void closeResources(ConnectionWrapper connectionWrapper, PreparedStatement preparedStatement) {
+    default void closeResources(ConnectionWrapper connectionWrapper, PreparedStatement preparedStatement, ResultSet resultSet) {
         try {
+            if (Objects.nonNull(resultSet)) {
+                resultSet.close();
+            }
             if (Objects.nonNull(preparedStatement)) {
                 preparedStatement.close();
             }
@@ -28,7 +32,7 @@ public interface Dao {
     }
 
     /**
-     *
+     * todo
      * @param parameter
      * @param sql
      * @return
@@ -45,7 +49,7 @@ public interface Dao {
         } catch (SQLException e) {
             logger.error("Exception execute sql", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }
@@ -67,7 +71,7 @@ public interface Dao {
         } catch (SQLException e) {
             logger.error("Exception execute sql", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }
@@ -92,7 +96,7 @@ public interface Dao {
         } catch (SQLException e) {
             logger.error("Exception execute sql", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }

@@ -36,13 +36,14 @@ public class EmployeeDao implements Dao {
     public Employee findEmployeeByEmail(String login) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Employee employee = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_EMPLOYEE_BY_EMAIL);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
             preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 employee = new Employee();
                 employee.setEmail(login);
@@ -61,7 +62,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while finding employee by email", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return employee;
     }
@@ -73,12 +74,13 @@ public class EmployeeDao implements Dao {
     public List<Employee> getSubordinates() {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<Employee> employees = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_SUBORDINATES);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             employees = new ArrayList<>();
             while (resultSet.next()) {
                 Employee employee = new Employee();
@@ -97,7 +99,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while getting subordinates", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return employees;
     }
@@ -120,7 +122,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception renewal employee position", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }
@@ -139,7 +141,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting employee", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }
@@ -147,13 +149,14 @@ public class EmployeeDao implements Dao {
     public Employee findEmployeeById(Long employeeId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Employee employee = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_EMPLOYEE_BY_ID);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
             preparedStatement.setLong(1, employeeId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 employee = new Employee();
                 employee.setEmployeeId(employeeId);
@@ -172,7 +175,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while finding employee by id", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return employee;
     }
@@ -195,7 +198,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception renewal employee", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }
@@ -219,7 +222,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception renewal employee with new password", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }

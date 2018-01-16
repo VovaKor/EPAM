@@ -24,13 +24,14 @@ public class NamesDao implements Dao {
     public Names findNamesByEmployeeId(Long employeeId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Names names = null;
         String sql = ResourceManager.QUERIES.getProperty(SELECT_NAMES_BY_ID);
         try {
             connectionWrapper = TransactionManager.getConnectionWrapper();
             preparedStatement = connectionWrapper.getPreparedStatement(sql);
             preparedStatement.setLong(1, employeeId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 names = new Names();
                 names.setFirstName(resultSet.getString(FIRST_NAME));
@@ -40,7 +41,7 @@ public class NamesDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception finding names by employee id", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, resultSet);
         }
         return names;
     }
@@ -60,7 +61,7 @@ public class NamesDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting employee names", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement);
+            closeResources(connectionWrapper, preparedStatement, null);
         }
         return result;
     }
