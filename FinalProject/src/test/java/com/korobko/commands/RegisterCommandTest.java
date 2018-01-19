@@ -119,6 +119,9 @@ public class RegisterCommandTest {
         when(mockedRequest.getParameter(FIRST_NAME)).thenReturn(firstName);
         when(mockedRequest.getParameter(PATRONYMIC)).thenReturn(patronymic);
         when(mockedRequest.getParameter(LAST_NAME)).thenReturn(lastName);
+        PowerMockito.mockStatic(TransactionManager.class);
+        Whitebox.setInternalState(EmployeeService.INSTANCE, "employeeDao", mockedEmployeeDao);
+        Whitebox.setInternalState(EmployeeService.INSTANCE, "namesDao", mockedNamesDao);
 
         String resultJSP = CommandEnum.REGISTER.getCurrentCommand().execute(mockedRequest);
         assertEquals("/WEB-INF/jsp/access/login.jsp", resultJSP);
@@ -136,6 +139,9 @@ public class RegisterCommandTest {
         when(mockedRequest.getParameter(FIRST_NAME)).thenReturn(firstName);
         when(mockedRequest.getParameter(PATRONYMIC)).thenReturn(patronymic);
         when(mockedRequest.getParameter(LAST_NAME)).thenReturn(lastName);
+        PowerMockito.mockStatic(TransactionManager.class);
+        Whitebox.setInternalState(EmployeeService.INSTANCE, "employeeDao", mockedEmployeeDao);
+        Whitebox.setInternalState(EmployeeService.INSTANCE, "namesDao", mockedNamesDao);
 
         String resultJSP = CommandEnum.REGISTER.getCurrentCommand().execute(mockedRequest);
         assertEquals("/WEB-INF/jsp/access/login.jsp", resultJSP);

@@ -67,7 +67,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting route", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }
@@ -85,12 +85,12 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while deleting route", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }
 
-    public int updateRoutePoints(Integer oldRNumber, String begin, String end) {
+    public int updateRoutePoints(Integer routeNumber, String begin, String end) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
         int result = 0;
@@ -100,16 +100,27 @@ public class RouteDao implements Dao {
             statement = wrapper.getPreparedStatement(sql);
             statement.setString(1, begin);
             statement.setString(2, end);
-            statement.setInt(3, oldRNumber);
+            statement.setInt(3, routeNumber);
             result = statement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Exception while updating route points", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }
 
+    /**
+     * Updates all columns in database {@code routes} table with given {@param oldRNumber}
+     * parameter and sets {@param newRNumber} instead.
+     *
+     * @param oldRNumber the {@code Integer} value {@code Route} number
+     * @param newRNumber the {@code Integer} value {@code Route} number to insert
+     * @param begin the {@code String} value {@code Route} begin point
+     * @param end the {@code String} value {@code Route} end point
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int updateFullRoute(Integer oldRNumber, Integer newRNumber, String begin, String end) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
@@ -126,7 +137,7 @@ public class RouteDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while updating full route", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }

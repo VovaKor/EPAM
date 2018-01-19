@@ -1,6 +1,8 @@
 package com.korobko.commands;
 
 import com.korobko.services.EmployeeService;
+import com.korobko.utils.Authentication;
+import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,12 @@ public class RegisterCommand implements Command {
         String firstName = request.getParameter(FIRST_NAME);
         String patronymic = request.getParameter(PATRONYMIC);
         String lastName = request.getParameter(LAST_NAME);
-        int result = EmployeeService.INSTANCE.register(email, password, firstName, patronymic, lastName);
+        int result = 0;
+        if (InputValidator.nonNullnotEmpty(email, password, firstName, lastName)
+                && Authentication.isCredentialsValid(email, password)) {
+            result = EmployeeService.INSTANCE.register(email, password, firstName, patronymic, lastName);
+        }
+
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_SUCCESS_REGISTER));
             return ResourceManager.CONFIGURATION.getProperty(PATH_PAGE_ACCESS_FEEDBACK);

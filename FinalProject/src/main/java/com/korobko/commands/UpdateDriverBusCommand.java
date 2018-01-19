@@ -20,7 +20,8 @@ public class UpdateDriverBusCommand implements Command {
     public String execute(HttpServletRequest request) {
         String employeeId = request.getParameter(DBColumns.EMPLOYEE_ID);
         String busId = request.getParameter(DBColumns.BUS_ID);
-        int result = AppointmentService.INSTANCE.executeUpdate(employeeId, busId);
+        Long empId = Long.valueOf(employeeId);
+        int result = AppointmentService.INSTANCE.executeUpdate(empId, busId);
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_DRIVER_BUS_UPDATED));
         } else {

@@ -40,24 +40,12 @@ public enum EmployeeService {
         return employeeDao.getSubordinates();
     }
 
-    public int updatePosition(String employeeId, String roleId) {
-        Long empId = Long.valueOf(employeeId);
-        if (InputValidator.nonInteger(roleId)) {
-            return 0;
-        }
-        Integer positionId = Integer.valueOf(roleId);
-        if (positionId == 0) {
-            positionId = null;
-        }
-        return employeeDao.updatePosition(empId, positionId);
+    public int updatePosition(Long employeeId, Integer roleId) {
+        return employeeDao.updatePosition(employeeId, roleId);
     }
 
     public int register(String email, String password, String firstName, String patronymic, String lastName) {
         int result = 0;
-        if (InputValidator.isNullOrEmpty(email, password, firstName, lastName)
-                || !Authentication.isCredentialsValid(email, password)) {
-            return result;
-        }
         try {
             TransactionManager.beginTransaction();
             if (Objects.nonNull(employeeDao.findEmployeeByEmail(email))) {
@@ -84,10 +72,6 @@ public enum EmployeeService {
 
     public int updateEmployee(String newPassword, Employee newEmployee) {
         int result = 0;
-        if (InputValidator.isNullOrEmpty(newEmployee.getEmail(), newEmployee.getPassword(), newEmployee.getNames().getFirstName(), newEmployee.getNames().getLastName())
-                || !Authentication.isCredentialsValid(newEmployee.getEmail(), newEmployee.getPassword())) {
-            return result;
-        }
         try {
             TransactionManager.beginTransaction();
             Employee oldEmployee = employeeDao.findEmployeeById(newEmployee.getEmployeeId());
@@ -98,7 +82,7 @@ public enum EmployeeService {
             }
             String newEmployeePasswordHash = HashGenerator.generateSHA512(newEmployee.getPassword());
             if (Authentication.isPasswordsMatches(oldEmployee.getPassword(), newEmployeePasswordHash)) {
-                if (InputValidator.isNullOrEmpty(newPassword)) {
+                if (Objects.isNull(newPassword) || newPassword.isEmpty()) {
                     result = employeeDao.updateEmployee(newEmployee);
                 }
                 if (Authentication.isPasswordValid(newPassword)) {

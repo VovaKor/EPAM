@@ -25,17 +25,15 @@ public enum BusModelService {
     }
 
     public int createBusModel(String modelName) {
-        if (InputValidator.isNullOrEmpty(modelName)) {
-            return Constants.ERROR_CODE;
-        }
+
         return busModelDao.insertBusModel(modelName);
     }
 
-    public int processBusModel(String modelId, String modelName) {
-        Long mId = Long.valueOf(modelId);
+    public int processBusModel(Long modelId, String modelName) {
+
         if (modelName.isEmpty()) {
-            return busModelDao.deleteBusModel(mId);
+            return busModelDao.deleteBusModel(modelId);
         }
-        return busModelDao.updateBusModel(mId, modelName);
+        return busModelDao.updateBusModel(modelId, modelName);
     }
 }

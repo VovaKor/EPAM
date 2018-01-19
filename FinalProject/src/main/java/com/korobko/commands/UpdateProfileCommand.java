@@ -5,7 +5,8 @@ import com.korobko.entities.Employee;
 import com.korobko.entities.EmployeePosition;
 import com.korobko.entities.Names;
 import com.korobko.services.EmployeeService;
-import com.korobko.utils.HashGenerator;
+import com.korobko.utils.Authentication;
+import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +33,26 @@ public class UpdateProfileCommand implements Command {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String newPassword = request.getParameter(PARR_NAME_NEW_PASSWORD);
-        Employee employee = createEmployee(session, request);
+        String email = request.getParameter(EMAIL);
+        String oldPassword = request.getParameter(PARR_NAME_OLD_PASSWORD);
+        String firstName = request.getParameter(FIRST_NAME);
+        String patronymic = request.getParameter(PATRONYMIC);
+        String lastName = request.getParameter(LAST_NAME);
+        int result = 0;
+        if (InputValidator.nonNullnotEmpty(email, oldPassword, firstName, lastName)
+                && Authentication.isCredentialsValid(email, oldPassword)) {
+            Employee employee = new Employee();
+            employee.setEmployeeId((Long) session.getAttribute(EMPLOYEE_ID));
+            employee.setEmail(email);
+            employee.setPassword(oldPassword);
+            Names names = new Names();
+            names.setFirstName(firstName);
+            names.setPatronymic(patronymic);
+            names.setLastName(lastName);
+            employee.setNames(names);
+            result = EmployeeService.INSTANCE.updateEmployee(newPassword, employee);
+        }
 
-        int result = EmployeeService.INSTANCE.updateEmployee(newPassword, employee);
         if (result == ROWS_AFFECTED_ON_UPDATE) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_PROFILE_UPDATED));
 
@@ -56,23 +74,5 @@ public class UpdateProfileCommand implements Command {
             request.setAttribute(ATTR_ERROR_LOGIN_PASS_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_ERROR_UPDATE_PROFILE));
         }
         return CommandEnum.PROFILE.getCurrentCommand().execute(request);
-    }
-
-    private Employee createEmployee(HttpSession session, HttpServletRequest request) {
-        String email = request.getParameter(EMAIL);
-        String oldPassword = request.getParameter(PARR_NAME_OLD_PASSWORD);
-        String firstName = request.getParameter(FIRST_NAME);
-        String patronymic = request.getParameter(PATRONYMIC);
-        String lastName = request.getParameter(LAST_NAME);
-        Employee employee = new Employee();
-        employee.setEmployeeId((Long) session.getAttribute(EMPLOYEE_ID));
-        employee.setEmail(email);
-        employee.setPassword(oldPassword);
-        Names names = new Names();
-        names.setFirstName(firstName);
-        names.setPatronymic(patronymic);
-        names.setLastName(lastName);
-        employee.setNames(names);
-        return employee;
     }
 }

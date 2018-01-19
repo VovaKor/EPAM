@@ -54,13 +54,13 @@ public class BusModelDao implements Dao {
         return executeUpdate(modelName, sql);
     }
 
-    public int deleteBusModel(Long mId) {
+    public int deleteBusModel(Long modelId) {
         String sql = ResourceManager.QUERIES.getProperty(DELETE_BUS_MODEL);
-        return executeUpdate(mId, sql);
+        return executeUpdate(modelId, sql);
     }
 
-    public int updateBusModel(Long mId, String modelName) {
+    public int updateBusModel(Long modelId, String modelName) {
         String sql = ResourceManager.QUERIES.getProperty(UPDATE_BUS_MODEL);
-        return executeUpdate(mId, modelName, sql);
+        return executeUpdate(modelId, modelName, sql);
     }
 }

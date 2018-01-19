@@ -61,7 +61,7 @@ public class NamesDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting employee names", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement, null);
+            closeResources(connectionWrapper, preparedStatement);
         }
         return result;
     }

@@ -1,6 +1,7 @@
 package com.korobko.commands;
 
 import com.korobko.services.RouteService;
+import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,14 @@ public class UpdateRouteCommand implements Command {
         String oldRouteNumber = request.getParameter(PAR_NAME_OLD_ROUTE_NUMBER);
         String begin = request.getParameter(BEGIN_POINT);
         String end = request.getParameter(END_POINT);
-        int result = RouteService.INSTANCE.processRoute(oldRouteNumber, newRouteNumber, begin, end);
+        int result = 0;
+        if (InputValidator.nonNullnotEmpty(oldRouteNumber, newRouteNumber, begin, end)
+                && InputValidator.isPositiveInteger(oldRouteNumber)
+                && InputValidator.isPositiveInteger(newRouteNumber)) {
+            Integer oldRNumber = Integer.valueOf(oldRouteNumber);
+            Integer newRNumber = Integer.valueOf(newRouteNumber);
+            result = RouteService.INSTANCE.processRoute(oldRNumber, newRNumber, begin, end);
+        }
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_ROUTE_UPDATED));
         } else {

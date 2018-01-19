@@ -2,6 +2,7 @@ package com.korobko.commands;
 
 import com.korobko.dao.DBColumns;
 import com.korobko.services.EmployeeService;
+import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,16 @@ public class UpdatePositionCommand implements Command {
     public String execute(HttpServletRequest request) {
         String roleId = request.getParameter(DBColumns.ROLE_ID);
         String employeeId = request.getParameter(DBColumns.EMPLOYEE_ID);
-        int result = EmployeeService.INSTANCE.updatePosition(employeeId, roleId);
+        int result = 0;
+        if (InputValidator.isPositiveInteger(roleId)) {
+            Long empId = Long.valueOf(employeeId);
+            Integer positionId = Integer.valueOf(roleId);
+            if (positionId == 0) {
+                positionId = null;
+            }
+            result = EmployeeService.INSTANCE.updatePosition(empId, positionId);
+        }
+
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_POSITION_UPDATED));
         } else {

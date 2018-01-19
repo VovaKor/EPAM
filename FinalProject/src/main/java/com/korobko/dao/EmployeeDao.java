@@ -68,8 +68,12 @@ public class EmployeeDao implements Dao {
     }
 
     /**
-     * todo
-     * @return except director desc order by role
+     * Fetches {@code Employee} objects with all {@code EmployeePosition}
+     * including {@code Employee} objects without any {@code EmployeePosition}
+     * assigned except {@code EmployeePosition.DIRECTOR} sorted by
+     * {@code EmployeePosition} in descending order
+     *
+     * @return the Java {@code List} of {@code Employee} objects
      */
     public List<Employee> getSubordinates() {
         ConnectionWrapper connectionWrapper = null;
@@ -104,6 +108,15 @@ public class EmployeeDao implements Dao {
         return employees;
     }
 
+    /**
+     * Updates {@code Employee} in database {@code employees} table. If given {@code Integer}
+     * parameter is 0 then sets column {@code role_id} to SQL {@code NULL}
+     *
+     * @param empId the Java {@code Long} value {@code Employee} id
+     * @param positionId the Java {@code Integer} value {@code EmployeePosition} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int updatePosition(Long empId, Integer positionId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
@@ -122,7 +135,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception renewal employee position", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement, null);
+            closeResources(connectionWrapper, preparedStatement);
         }
         return result;
     }
@@ -141,7 +154,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting employee", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement, null);
+            closeResources(connectionWrapper, preparedStatement);
         }
         return result;
     }
@@ -198,11 +211,21 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception renewal employee", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement, null);
+            closeResources(connectionWrapper, preparedStatement);
         }
         return result;
     }
 
+    /**
+     * Updates all columns in database {@code employees} and {@code names}
+     * tables and sets {@param newPassword} instead of existed password.
+     *
+     * @param newPassword the {@code String} value new {@code Employee}
+     *                    password to insert
+     * @param employee the {@code Employee} object to update
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int updateEmployee(String newPassword, Employee employee) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
@@ -222,7 +245,7 @@ public class EmployeeDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception renewal employee with new password", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement, null);
+            closeResources(connectionWrapper, preparedStatement);
         }
         return result;
     }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Vova Korobko
@@ -13,11 +14,11 @@ public final class InputValidator {
     private InputValidator() {
     }
 
-    public static boolean isNullOrEmpty(String ... parameters) {
-        return Arrays.stream(parameters).anyMatch(Objects::isNull) || Arrays.stream(parameters).anyMatch(String::isEmpty);
+    public static boolean nonNullnotEmpty(String... parameters) {
+        return Arrays.stream(parameters).allMatch(Objects::nonNull) && !Arrays.stream(parameters).allMatch(String::isEmpty);
     }
 
-    public static boolean nonInteger(String routeNumber) {
-        return routeNumber.matches("\\D") || Long.valueOf(routeNumber) > Integer.MAX_VALUE;
+    public static boolean isPositiveInteger(String routeNumber) {
+        return routeNumber.matches("\\d") && Long.valueOf(routeNumber) <= Integer.MAX_VALUE;
     }
 }

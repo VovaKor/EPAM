@@ -6,6 +6,8 @@ import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Objects;
+
 import static com.korobko.utils.Constants.*;
 
 /**
@@ -19,7 +21,11 @@ public class ApproveAppointmentCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String appId = request.getParameter(DBColumns.APPOINTMENT_ID);
-        int result = AppointmentService.INSTANCE.approveAppointment(appId);
+        int result = 0;
+        if (Objects.nonNull(appId) && !appId.isEmpty()) {
+            Long appointmentId = Long.valueOf(appId);
+            result = AppointmentService.INSTANCE.approveAppointment(appointmentId);
+        }
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_APPOINTMENT_APPROVED));
         } else {

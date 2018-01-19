@@ -21,6 +21,11 @@ public class RolesDao implements Dao {
     RolesDao() {
     }
 
+    /**
+     * Fetches all {@code EmployeePosition} objects except {@code EmployeePosition.DIRECTOR}
+     *
+     * @return the Java {@code List} of {@code EmployeePosition} objects
+     */
     public List<EmployeePosition> getSubordinatePositions() {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;

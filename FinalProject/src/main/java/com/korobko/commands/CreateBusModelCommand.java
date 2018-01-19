@@ -1,8 +1,8 @@
 package com.korobko.commands;
 
 import com.korobko.dao.DBColumns;
-import com.korobko.entities.BusModel;
 import com.korobko.services.BusModelService;
+import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,11 @@ public class CreateBusModelCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String modelName = request.getParameter(DBColumns.MODEL_NAME);
-        int result = BusModelService.INSTANCE.createBusModel(modelName);
+        int result = 0;
+        if (InputValidator.nonNullnotEmpty(modelName)) {
+            result = BusModelService.INSTANCE.createBusModel(modelName);
+        }
+
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_BUS_MODEL_CREATED));
         } else {

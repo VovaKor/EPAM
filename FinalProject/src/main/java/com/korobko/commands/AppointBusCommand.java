@@ -22,7 +22,9 @@ public class AppointBusCommand implements Command {
     public String execute(HttpServletRequest request) {
         String employeeId = request.getParameter(DBColumns.EMPLOYEE_ID);
         String appointmentId = request.getParameter(DBColumns.APPOINTMENT_ID);
-        Appointment appointment = AppointmentService.INSTANCE.getPoorAppointment(appointmentId, employeeId);
+        Long appId = Long.valueOf(appointmentId);
+        Long empId = Long.valueOf(employeeId);
+        Appointment appointment = AppointmentService.INSTANCE.getPoorAppointment(appId, empId);
         List<String> busIds = BusService.INSTANCE.getFreeBusIds();
         request.setAttribute(ATTR_NAME_BUSES, busIds);
         request.setAttribute(ATTR_NAME_APPOINTMENT, appointment);

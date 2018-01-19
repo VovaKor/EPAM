@@ -30,9 +30,9 @@ public class BusDao implements Dao {
     }
 
     /**
-     * todo
+     * Fetches {@code Bus} objects sorted by {@code Route} number in descending order
      *
-     * @return sorted by route number in descending order
+     * @return {@code List} of {@code Bus} objects
      */
     public List<Bus> getAllBuses() {
         ConnectionWrapper wrapper = null;
@@ -69,6 +69,14 @@ public class BusDao implements Dao {
         return buses;
     }
 
+    /**
+     * Fetches {@code Bus} object by VIN
+     *
+     * @param vin the Java {@code String} value {@code Bus} VIN
+     * @return either (1) {@code Bus} object
+     *         or (2) {@code null} if exception happened or no VIN
+     *         in database
+     */
     public Bus getBusByVIN(String vin) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
@@ -102,6 +110,15 @@ public class BusDao implements Dao {
         return bus;
     }
 
+    /**
+     * Updates {@code Bus} in database {@code buses} table. If given {@code Integer}
+     * parameter is 0 then sets column {@code route_number} to SQL {@code NULL}
+     *
+     * @param number the Java {@code Integer} value {@code Route} number
+     * @param vin the Java {@code String} value {@code Bus} VIN
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int updateBusRoute(Integer number, String vin) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
@@ -120,11 +137,17 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception bus route renewal", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }
 
+    /**
+     * Fetches {@code Bus} ids where {@code Route} number is {@code null}
+     *
+     * @return either (1) the {@code List<String>} with ids
+     *         or (2) {@code null} if exception happened
+     */
     public List<String> findFreeBusIds() {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
@@ -148,6 +171,15 @@ public class BusDao implements Dao {
         return ids;
     }
 
+    /**
+     * Creates new row in database {@code buses} table
+     *
+     * @param vin the {@code String} value {@code Bus} VIN
+     * @param registrNumber the {@code String} value {@code Bus} registration number
+     * @param modelId the {@code Long} value {@code BusModel} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int insertBus(String vin, String registrNumber, Long modelId) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
@@ -163,17 +195,33 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting bus", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }
 
-    public int deleteBus(String oldVin) {
+    /**
+     * Deletes row from database {@code buses} table with given parameter
+     *
+     * @param vin the {@code String} value {@code Bus} VIN
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
+    public int deleteBus(String vin) {
         String sql = ResourceManager.QUERIES.getProperty(DELETE_BUS);
-        return executeUpdate(oldVin, sql);
+        return executeUpdate(vin, sql);
     }
 
-    public int updateBusParams(String oldVin, String registrNumber, Long modelId) {
+    /**
+     * Updates {@code Bus} in database {@code buses} table.
+     *
+     * @param vin the {@code String} value {@code Bus} VIN
+     * @param registrNumber the {@code String} value {@code Bus} registration number
+     * @param modelId the {@code Long} value {@code BusModel} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
+    public int updateBusParams(String vin, String registrNumber, Long modelId) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
         int result = 0;
@@ -183,16 +231,27 @@ public class BusDao implements Dao {
             statement = wrapper.getPreparedStatement(sql);
             statement.setString(1, registrNumber);
             statement.setLong(2, modelId);
-            statement.setString(3, oldVin);
+            statement.setString(3, vin);
             result = statement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Exception while updating bus params", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }
 
+    /**
+     * Updates all columns in database {@code buses} table with given {@param oldVin}
+     * parameter and sets {@param newVin} instead.
+     *
+     * @param oldVin the {@code String} value {@code Bus} VIN
+     * @param newVin the {@code String} value {@code Bus} VIN to insert
+     * @param registrNumber the {@code String} value {@code Bus} registration number
+     * @param modelId the {@code Long} value {@code BusModel} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int updateFullBus(String oldVin, String newVin, String registrNumber, Long modelId) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
@@ -209,7 +268,7 @@ public class BusDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while updating full bus", e);
         } finally {
-            closeResources(wrapper, statement, null);
+            closeResources(wrapper, statement);
         }
         return result;
     }

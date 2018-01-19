@@ -36,23 +36,22 @@ public enum AppointmentService {
     }
 
     /**
-     * todo
+     * Adds {@code Names} fetched from database to existing {@code Employee} in {@code Appointment} or creates
+     * {@code Appointment}, {@code Employee}, sets id and {@code Names}.
      *
-     * @param appointmentId
-     * @param employeeId
-     * @return
+     * @param appointmentId the Java {@code Long} value {@code Appointment} id
+     * @param employeeId the Java {@code Long} value {@code Employee} id
+     * @return the {@code Appointment} object
      */
-    public Appointment getPoorAppointment(String appointmentId, String employeeId) {
-        Long appId = Long.valueOf(appointmentId);
-        Long empId = Long.valueOf(employeeId);
-        Names names = namesDao.findNamesByEmployeeId(empId);
-        Appointment appointment = appointmentDao.getPoorAppointmentById(appId);
+    public Appointment getPoorAppointment(Long appointmentId, Long employeeId) {
+
+        Names names = namesDao.findNamesByEmployeeId(employeeId);
+        Appointment appointment = appointmentDao.getPoorAppointmentById(appointmentId);
         if (Objects.isNull(appointment)) {
             Employee employee = new Employee();
-            employee.setEmployeeId(empId);
+            employee.setEmployeeId(employeeId);
             employee.setNames(names);
             appointment = new Appointment();
-            appointment.setAppointmentId(appId);
             appointment.setEmployee(employee);
         } else {
             appointment.getEmployee().setNames(names);
@@ -60,18 +59,17 @@ public enum AppointmentService {
         return appointment;
     }
 
-    public int executeUpdate(String employeeId, String busId) {
+    public int executeUpdate(Long employeeId, String busId) {
         try {
-            int result = 0;
+            int result;
             TransactionManager.beginTransaction();
-            Long empId = Long.valueOf(employeeId);
-            Appointment appointment = appointmentDao.getPoorAppointmentByEmployeeId(empId);
+            Appointment appointment = appointmentDao.getPoorAppointmentByEmployeeId(employeeId);
             if (Objects.isNull(appointment) && busId.isEmpty()) {
                 TransactionManager.endTransaction();
                 return ROWS_AFFECTED;
             }
             if (Objects.isNull(appointment)) {
-                result = appointmentDao.insertAppointment(empId, busId);
+                result = appointmentDao.insertAppointment(employeeId, busId);
                 TransactionManager.endTransaction();
                 return result;
             }
@@ -108,19 +106,15 @@ public enum AppointmentService {
         return null;
     }
 
-    public int approveAppointment(String appId) {
-        if (Objects.isNull(appId) || appId.isEmpty()) {
-            return ERROR_CODE;
-        }
-        Long appointmentId = Long.valueOf(appId);
+    public int approveAppointment(Long appId) {
         int result = 0;
         try {
             TransactionManager.beginTransaction();
-            Appointment appointment = appointmentDao.getPoorAppointmentById(appointmentId);
+            Appointment appointment = appointmentDao.getPoorAppointmentById(appId);
             if (Objects.nonNull(appointment.getApproved())) {
                 result = ERROR_CODE;
             } else {
-                result = appointmentDao.approveAppointment(appointmentId);
+                result = appointmentDao.approveAppointment(appId);
             }
             TransactionManager.endTransaction();
         } catch (TransactionException | SQLException e) {

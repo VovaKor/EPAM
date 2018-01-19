@@ -22,8 +22,8 @@ public class UpdateBusModelCommand implements Command {
     public String execute(HttpServletRequest request) {
         String modelId = request.getParameter(DBColumns.MODEL_ID);
         String modelName = request.getParameter(DBColumns.MODEL_NAME);
-        int result = BusModelService.INSTANCE.processBusModel(modelId, modelName);
-        if (result == ROWS_AFFECTED) {
+        Long mId = Long.valueOf(modelId);
+        if (ROWS_AFFECTED == BusModelService.INSTANCE.processBusModel(mId, modelName)) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_BUS_MODEL_UPDATED));
         } else {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_ERROR_UPDATE_BUS_MODEL));

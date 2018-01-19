@@ -2,6 +2,7 @@ package com.korobko.commands;
 
 import com.korobko.dao.DBColumns;
 import com.korobko.services.BusService;
+import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,10 @@ public class UpdateBusCommand implements Command {
         String registrNumber = request.getParameter(DBColumns.REGISTR_NUMBER);
         String modelId = request.getParameter(DBColumns.MODEL_ID);
         String oldVin = request.getParameter(PARAM_NAME_OLD_VIN);
-        int result = BusService.INSTANCE.processBus(oldVin, newVin, registrNumber, modelId);
+        int result = 0;
+        if (InputValidator.nonNullnotEmpty(oldVin, modelId)) {
+            result = BusService.INSTANCE.processBus(oldVin, newVin, registrNumber, modelId);
+        }
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_BUS_UPDATED));
         } else {

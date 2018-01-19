@@ -24,7 +24,14 @@ public class CreateRouteCommand implements Command {
         String routeNumber = request.getParameter(ROUTE_NUMBER);
         String begin = request.getParameter(BEGIN_POINT);
         String end = request.getParameter(END_POINT);
-        int result = RouteService.INSTANCE.createRoute(routeNumber, begin, end);
+        int result = 0;
+        if (InputValidator.nonNullnotEmpty(routeNumber, begin, end)
+                && InputValidator.isPositiveInteger(routeNumber)) {
+            Integer rNumber = Integer.valueOf(routeNumber);
+            if (rNumber > 0) {
+                result = RouteService.INSTANCE.createRoute(rNumber, begin, end);
+            }
+        }
         if (result == ROWS_AFFECTED) {
             request.setAttribute(ATTR_NAME_FEEDBACK_MESSAGE, ResourceManager.MESSAGES.getProperty(MESSAGE_ROUTE_CREATED));
         } else {

@@ -28,21 +28,8 @@ public enum BusService {
         return busDao.getBusByVIN(vin);
     }
 
-    /**
-     * todo
-     * @param routeNumber
-     * @param vin
-     * @return
-     */
-    public int updateBusRoute(String routeNumber, String vin) {
-        if (InputValidator.nonInteger(routeNumber)) {
-            return 0;
-        }
-        Integer number = Integer.valueOf(routeNumber);
-        if (number == 0) {
-            number = null;
-        }
-        return busDao.updateBusRoute(number, vin);
+    public int updateBusRoute(Integer routeNumber, String vin) {
+        return busDao.updateBusRoute(routeNumber, vin);
     }
 
     public List<String> getFreeBusIds() {
@@ -50,16 +37,24 @@ public enum BusService {
     }
 
     public int createBus(String vin, String registrNumber, String modelId) {
-        if (InputValidator.isNullOrEmpty(vin, modelId)) {
-            return Constants.ERROR_CODE;
-        }
         return busDao.insertBus(vin, registrNumber, Long.valueOf(modelId));
     }
 
+    /**
+     * <p>Calls {@code BusDao.deleteBus} method when {@param newVin}
+     * is empty.
+     * <p>Calls {@code BusDao.updateBusParams} method when {@param newVin}
+     * equals {@param oldVin} or {@code BusDao.updateFullBus} if they not equals.
+     *
+     * @param oldVin the {@code String} value {@code Bus} VIN
+     * @param newVin the {@code String} value {@code Bus} VIN to insert
+     * @param registrNumber the {@code String} value {@code Bus} registration number
+     * @param modelId the {@code Long} value {@code BusModel} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int processBus(String oldVin, String newVin, String registrNumber, String modelId) {
-        if (InputValidator.isNullOrEmpty(oldVin, modelId)) {
-            return Constants.ERROR_CODE;
-        }
+
         if (newVin.isEmpty()) {
             return busDao.deleteBus(oldVin);
         }

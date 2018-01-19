@@ -15,6 +15,8 @@ import java.util.List;
 import static com.korobko.dao.DBColumns.*;
 
 /**
+ * An object used to perform CRUD operations with {@code Appointment} entities.
+ *
  * @author Vova Korobko
  */
 public class AppointmentDao implements Dao {
@@ -31,8 +33,10 @@ public class AppointmentDao implements Dao {
     }
 
     /**
-     * todo
-     * @return list of poor Appointment objects
+     * Lazy fetches {@code Appointment} objects with {@code EmployeePosition.DRIVER}
+     * sorted in descending order by approved date and then by id
+     *
+     * @return list of poor {@code Appointment} objects
      */
     public List<Appointment> getAppointmentsIncludingFreeDrivers() {
         ConnectionWrapper connectionWrapper = null;
@@ -71,6 +75,14 @@ public class AppointmentDao implements Dao {
         return appointments;
     }
 
+    /**
+     * Lazy fetches {@code Appointment} object by id. Don't fetch {@code Names}.
+     * {@code Employee} and {@code Bus} objects only will have their ids.
+     *
+     * @param appointmentId the Java {@code Long} value
+     * @return {@code Appointment} object or {@code null} if no {@code Appointment}
+     *         with given id
+     */
     public Appointment getPoorAppointmentById(Long appointmentId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
@@ -102,6 +114,13 @@ public class AppointmentDao implements Dao {
         return appointment;
     }
 
+    /**
+     * Lazy fetches {@code Appointment} object by {@code Employee} id
+     *
+     * @param employeeId the Java {@code Long} value
+     * @return {@code Appointment} object or {@code null} if no {@code Appointment}
+     *         with given {@code Employee} id
+     */
     public Appointment getPoorAppointmentByEmployeeId(Long employeeId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
@@ -133,6 +152,14 @@ public class AppointmentDao implements Dao {
         return appointment;
     }
 
+    /**
+     * Creates new row in database {@code appointments} table and inserts data
+     *
+     * @param employeeId the Java {@code Long} value {@code Employee} id
+     * @param busId the Java {@code String} value {@code Bus} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int insertAppointment(Long employeeId, String busId) {
         ConnectionWrapper connectionWrapper = null;
         PreparedStatement preparedStatement = null;
@@ -147,21 +174,47 @@ public class AppointmentDao implements Dao {
         } catch (SQLException e) {
             logger.error("Exception while inserting appointment", e);
         } finally {
-            closeResources(connectionWrapper, preparedStatement, null);
+            closeResources(connectionWrapper, preparedStatement);
         }
         return result;
     }
 
+    /**
+     * Deletes row from database {@code appointments} table with given
+     * {@code Appointment} id
+     *
+     * @param appointmentId the Java {@code Long} value {@code Appointment} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int deleteAppointment(Long appointmentId) {
         String sql = ResourceManager.QUERIES.getProperty(DELETE_APPOINTMENT_BY_ID);
         return executeUpdate(appointmentId, sql);
     }
 
+    /**
+     * Updates row in database {@code appointments} table sets given {@code Bus} id
+     *
+     * @param appointmentId the Java {@code Long} value {@code Appointment} id
+     *                      to update
+     * @param busId the Java {@code String} value {@code Bus} id
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int updateAppointment(Long appointmentId, String busId) {
         String sql = ResourceManager.QUERIES.getProperty(UPDATE_APPOINTMENT);
         return executeUpdate(appointmentId, busId, sql);
     }
 
+    /**
+     * Updates row in database {@code appointments} table sets {@code approved_on}
+     * column to {@code CURRENT_TIMESTAMP}
+     *
+     * @param appointmentId the Java {@code Long} value {@code Appointment} id
+     *                      to update
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     *         or (2) 0 if exception happened
+     */
     public int approveAppointment(Long appointmentId) {
         String sql = ResourceManager.QUERIES.getProperty(APPROVE_APPOINTMENT);
         return executeUpdate(appointmentId, sql);
