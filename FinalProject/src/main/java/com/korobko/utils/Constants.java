@@ -6,6 +6,10 @@ package com.korobko.utils;
 public interface Constants {
     String PARAM_NAME_LOGIN = "login";
     String PARAM_NAME_COMMAND = "command";
+    String PARAM_NAME_PAGE = "page";
+    String ATTR_NAME_CURRENT_PAGE = "currentPage";
+    String ATTR_NAME_PAGE_AMOUNT = "pageAmount";
+    int ROWS_PER_PAGE = 10;
     int ROWS_AFFECTED = 1;
     int ERROR_CODE = -1;
     String PATH_PAGE_ADMIN_FEEDBACK = "path.page.admin.feedback";

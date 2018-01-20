@@ -1,17 +1,17 @@
 package com.korobko.commands;
 
-import com.korobko.dao.AppointmentDao;
-import com.korobko.dao.BusDao;
-import com.korobko.dao.EmployeeDao;
-import com.korobko.dao.RolesDao;
+import com.korobko.dao.*;
 import com.korobko.entities.Employee;
 import com.korobko.entities.EmployeePosition;
-import com.korobko.services.AppointmentService;
-import com.korobko.services.BusService;
-import com.korobko.services.EmployeeService;
-import com.korobko.services.PositionService;
+import com.korobko.services.*;
+import com.korobko.utils.connection.TransactionManager;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,8 @@ import static org.mockito.Mockito.*;
 /**
  * @author Vova Korobko
  */
-
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({TransactionManager.class, PaginationService.class})
 public class LoginCommandTest {
 
     private static HttpServletRequest mockedRequest;
@@ -39,6 +40,7 @@ public class LoginCommandTest {
     private static RolesDao mockedRolesDao;
     private static AppointmentDao mockedAppointmentDao;
     private static BusDao mockedBusDao;
+
 
     @BeforeClass
     public static void mockResources() {
@@ -110,13 +112,16 @@ public class LoginCommandTest {
         employee.setEmail(email);
         employee.setPassword("58b5444cf1b6253a4317fe12daff411a78bda0a95279b1d5768ebf5ca60829e78da944e8a9160a0b6d428cb213e813525a72650dac67b88879394ff624da482f");
         employee.setPosition(EmployeePosition.ADMIN);
+
         when(mockedRequest.getParameter(PARAM_NAME_LOGIN)).thenReturn(email);
         when(mockedRequest.getParameter(PASSWORD)).thenReturn("admin1");
         when(mockedRequest.getSession()).thenReturn(createTestSession());
+        PowerMockito.mockStatic(TransactionManager.class);
         when(mockedEmployeeDao.findEmployeeByEmail(email)).thenReturn(employee);
-
+        PowerMockito.suppress(PowerMockito.method(PaginationService.class, "getPageAmount", DaoType.class));
         Whitebox.setInternalState(BusService.INSTANCE, "busDao", mockedBusDao);
         Whitebox.setInternalState(EmployeeService.INSTANCE, "employeeDao", mockedEmployeeDao);
+
         String resultJSP = CommandEnum.LOGIN.getCurrentCommand().execute(mockedRequest);
         assertEquals("/WEB-INF/jsp/admin/admin_buses.jsp", resultJSP);
     }

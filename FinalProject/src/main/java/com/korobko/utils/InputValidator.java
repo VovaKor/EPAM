@@ -15,10 +15,13 @@ public final class InputValidator {
     }
 
     public static boolean nonNullnotEmpty(String... parameters) {
-        return Arrays.stream(parameters).allMatch(Objects::nonNull) && !Arrays.stream(parameters).allMatch(String::isEmpty);
+        return Arrays.stream(parameters).allMatch(Objects::nonNull)
+                && !Arrays.stream(parameters).allMatch(String::isEmpty);
     }
 
     public static boolean isPositiveInteger(String routeNumber) {
-        return routeNumber.matches("\\d") && Long.valueOf(routeNumber) <= Integer.MAX_VALUE;
+        return Objects.nonNull(routeNumber)
+                && routeNumber.matches("\\d")
+                && Long.valueOf(routeNumber) <= Integer.MAX_VALUE;
     }
 }

@@ -151,5 +151,17 @@ public interface Dao {
         }
         return result;
     }
+
+    /**
+     * <p>Gets rows amount from database table,
+     * e.g. for pagination implementations.
+     * <p>Throws {@code UnsupportedOperationException} if not implemented.
+     *
+     * @return either (1) the Java {@code int} rows amount
+     *         or (2) 0 if exception happened or no rows in table
+     */
+    default int getRowCount() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
 

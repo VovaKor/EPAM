@@ -4,10 +4,10 @@ import com.korobko.dao.BusDao;
 import com.korobko.dao.DaoFactory;
 import com.korobko.dao.DaoType;
 import com.korobko.entities.Bus;
-import com.korobko.utils.Constants;
-import com.korobko.utils.InputValidator;
 
 import java.util.List;
+
+import static com.korobko.utils.Constants.ROWS_PER_PAGE;
 
 /**
  * @author Vova Korobko
@@ -20,8 +20,8 @@ public enum BusService {
         this.busDao = (BusDao) DaoFactory.INSTANCE.getDao(DaoType.BUS);
     }
 
-    public List<Bus> getAllBuses() {
-        return busDao.getAllBuses();
+    public List<Bus> getAllBuses(int requestedPage) {
+        return busDao.getAllBuses(PaginationService.INSTANCE.calculateOffset(requestedPage), ROWS_PER_PAGE);
     }
 
     public Bus getBusByVIN(String vin) {

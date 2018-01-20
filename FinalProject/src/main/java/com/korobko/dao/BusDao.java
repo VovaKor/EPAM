@@ -25,16 +25,48 @@ public class BusDao implements Dao {
     private static final String DELETE_BUS = "delete.bus";
     private static final String UPDATE_BUS_PARAMS = "update.bus.params";
     private static final String UPDATE_BUS_FULL = "update.bus.full";
+    private static final String SELECT_BUSES_ROW_COUNT = "select.buses.row.count";
 
     BusDao() {
     }
 
     /**
-     * Fetches {@code Bus} objects sorted by {@code Route} number in descending order
+     * Gets rows amount from database {@code buses} table
      *
+     * @return either (1) the Java {@code int} rows amount
+     *         or (2) 0 if exception happened or no rows in table
+     */
+    @Override
+    public int getRowCount() {
+        ConnectionWrapper wrapper = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int rowCount = 0;
+        String sql = ResourceManager.QUERIES.getProperty(SELECT_BUSES_ROW_COUNT);
+        try {
+            wrapper = TransactionManager.getConnectionWrapper();
+            statement = wrapper.getPreparedStatement(sql);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                rowCount = resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            logger.error("Exception while getting buses row count", e);
+        } finally {
+            closeResources(wrapper, statement, resultSet);
+        }
+        return rowCount;
+    }
+    /**
+     * Fetches {@code Bus} objects sorted by {@code Route} number in descending
+     * order limited by {@param offset} and {@param rowsPerPage}.
+     *
+     * @param offset the {@code int} value offset against first row in the table
+     * @param rowsPerPage the {@code int} value max size of resulted {@code List}
      * @return {@code List} of {@code Bus} objects
      */
-    public List<Bus> getAllBuses() {
+    public List<Bus> getAllBuses(int offset, int rowsPerPage) {
         ConnectionWrapper wrapper = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -43,6 +75,8 @@ public class BusDao implements Dao {
         try {
             wrapper = TransactionManager.getConnectionWrapper();
             statement = wrapper.getPreparedStatement(sql);
+            statement.setInt(1, offset);
+            statement.setInt(2, rowsPerPage);
             resultSet = statement.executeQuery();
             buses = new ArrayList<>();
             while (resultSet.next()) {

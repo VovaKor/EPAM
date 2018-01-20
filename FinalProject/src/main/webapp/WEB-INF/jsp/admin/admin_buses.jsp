@@ -39,6 +39,6 @@
             </tr>
         </c:forEach>
     </table>
-
+    <c:import url="/WEB-INF/jsp/fragments/pagination.jsp" charEncoding="utf-8"/>
 </div>
 </body></html>
