@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1" author="volodymyr.korobko@gmail.com">
+        <insert tableName="roles">
+            <column name="role_id" value="1"></column>
+            <column name="role" value="ADMIN"></column>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_id" value="2"></column>
+            <column name="role" value="DRIVER"></column>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_id" value="3"></column>
+            <column name="role" value="DIRECTOR"></column>
+        </insert>
+        <insert tableName="employees">
+            <column name="role_id" value="3"></column>
+            <column name="email" value="director@director.com"></column>
+            <column name="password" value="376785415685b3ea67620da49571f303ea750dd30e6543f001d3d629115dcc5e3bcf52af35c6c34d10fa27f79e11e6482cc3e725d7fb856ae127d54a7c5d2d22"></column>
+        </insert>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>
