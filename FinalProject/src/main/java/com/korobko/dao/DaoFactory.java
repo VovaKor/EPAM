@@ -3,8 +3,9 @@ package com.korobko.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ public enum DaoFactory {
 
     INSTANCE;
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private Map<DaoType, Dao> daoMap = new HashMap<>();
+    private Map<DaoType, Dao> daoMap = new ConcurrentHashMap<>();
 
     /**
      * <p>Attempts to get a reference to dao object of given daoType.
@@ -23,7 +24,7 @@ public enum DaoFactory {
      * @param daoType a type of dao to retrieve
      * @return a dao object of given daoType
      */
-    public synchronized Dao getDao(DaoType daoType) {
+    public Dao getDao(DaoType daoType) {
         Dao dao = daoMap.get(daoType);
         if (Objects.nonNull(dao)) {
             return dao;
