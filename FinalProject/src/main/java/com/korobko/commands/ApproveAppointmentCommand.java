@@ -5,7 +5,6 @@ import com.korobko.services.AppointmentService;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.Objects;
 
 import static com.korobko.utils.Constants.*;

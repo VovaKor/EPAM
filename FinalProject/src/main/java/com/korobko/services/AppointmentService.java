@@ -14,7 +14,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-import static com.korobko.utils.Constants.*;
+import static com.korobko.utils.Constants.ERROR_CODE;
+import static com.korobko.utils.Constants.ROWS_AFFECTED;
 /**
  * @author Vova Korobko
  */

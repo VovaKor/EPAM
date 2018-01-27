@@ -4,14 +4,13 @@ import com.korobko.dao.DBColumns;
 import com.korobko.entities.Employee;
 import com.korobko.entities.EmployeePosition;
 import com.korobko.services.EmployeeService;
-import com.korobko.utils.Constants;
 import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
-import static com.korobko.utils.Constants.*;
+import static com.korobko.utils.Constants.PATH_PAGE_ERROR_403;
 
 /**
  * @author Vova Korobko

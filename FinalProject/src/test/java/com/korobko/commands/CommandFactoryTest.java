@@ -5,8 +5,9 @@ import org.junit.*;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.korobko.utils.Constants.PARAM_NAME_COMMAND;
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Vova Korobko

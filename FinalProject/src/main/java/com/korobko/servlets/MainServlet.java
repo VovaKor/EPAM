@@ -2,7 +2,6 @@ package com.korobko.servlets;
 
 import com.korobko.commands.Command;
 import com.korobko.commands.CommandFactory;
-
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.korobko.utils.Constants.*;
+import static com.korobko.utils.Constants.LOG4J_PROPERTIES_LOCATION;
+import static com.korobko.utils.Constants.SERVLET_ROOT;
 /**
  * An entry point of the app
  *

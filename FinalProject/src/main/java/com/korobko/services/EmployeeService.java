@@ -9,7 +9,6 @@ import com.korobko.exceptions.TransactionException;
 import com.korobko.utils.Authentication;
 import com.korobko.utils.Constants;
 import com.korobko.utils.HashGenerator;
-import com.korobko.utils.InputValidator;
 import com.korobko.utils.connection.TransactionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

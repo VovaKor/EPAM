@@ -6,12 +6,8 @@ import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.korobko.dao.DBColumns.BEGIN_POINT;
-import static com.korobko.dao.DBColumns.END_POINT;
-import static com.korobko.dao.DBColumns.ROUTE_NUMBER;
-import static com.korobko.utils.Constants.ATTR_NAME_FEEDBACK_MESSAGE;
-import static com.korobko.utils.Constants.PATH_PAGE_DIRECTOR_FEEDBACK;
-import static com.korobko.utils.Constants.ROWS_AFFECTED;
+import static com.korobko.dao.DBColumns.*;
+import static com.korobko.utils.Constants.*;
 
 /**
  * @author Vova Korobko

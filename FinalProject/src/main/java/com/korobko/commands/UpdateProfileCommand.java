@@ -11,7 +11,6 @@ import com.korobko.utils.ResourceManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import java.util.Objects;
 
 import static com.korobko.dao.DBColumns.*;

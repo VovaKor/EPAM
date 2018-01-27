@@ -7,7 +7,6 @@ import com.korobko.services.*;
 import com.korobko.utils.connection.TransactionManager;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -17,16 +16,16 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.korobko.dao.DBColumns.PASSWORD;
-import static com.korobko.utils.Constants.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static com.korobko.utils.Constants.PARAM_NAME_LOGIN;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Vova Korobko

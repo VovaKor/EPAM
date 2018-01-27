@@ -4,12 +4,10 @@ import com.korobko.services.RouteService;
 import com.korobko.utils.InputValidator;
 import com.korobko.utils.ResourceManager;
 
-import static com.korobko.dao.DBColumns.*;
-import static com.korobko.utils.Constants.ATTR_NAME_FEEDBACK_MESSAGE;
-import static com.korobko.utils.Constants.PATH_PAGE_DIRECTOR_FEEDBACK;
-import static com.korobko.utils.Constants.ROWS_AFFECTED;
-
 import javax.servlet.http.HttpServletRequest;
+
+import static com.korobko.dao.DBColumns.*;
+import static com.korobko.utils.Constants.*;
 
 /**
  * @author Vova Korobko

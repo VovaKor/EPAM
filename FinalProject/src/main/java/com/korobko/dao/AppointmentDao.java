@@ -1,6 +1,9 @@
 package com.korobko.dao;
 
-import com.korobko.entities.*;
+import com.korobko.entities.Appointment;
+import com.korobko.entities.Bus;
+import com.korobko.entities.Employee;
+import com.korobko.entities.Names;
 import com.korobko.utils.DateTime;
 import com.korobko.utils.ResourceManager;
 import com.korobko.utils.connection.ConnectionWrapper;
